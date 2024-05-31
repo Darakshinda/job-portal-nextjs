@@ -1,20 +1,14 @@
-.body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .inputContainer {
-  max-width: 500px; /* Adjust the width as needed */
+  max-width: 700px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+  border-radius: 20px; /* Increased border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: auto; /* Centering the box */
+  margin: auto;
+  gap: 20px; /* Increased gap between elements */
 }
 
 .inputWrapper {
@@ -40,16 +34,23 @@
 
 .inputBox input:focus,
 .inputBox textarea:focus {
-  border-color: #007bff; /* Example color for focus */
+  border-color: #007bff;
 }
 
 .salaryContainer {
+  margin-bottom: 20px;
+}
+
+.salaryInputContainer {
   display: flex;
   align-items: center;
 }
 
 .salaryInput {
   flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   margin-right: 5px;
 }
 
@@ -58,8 +59,9 @@
 }
 
 .descriptionInput {
-  height: 100px; /* Adjust height as needed */
+  height: 100px;
 }
+
 .postButton {
   padding: 10px 20px;
   background-color: #3a4b9a;
@@ -67,8 +69,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  align-self: center; /* Center the button */
-  margin-top: 20px; /* Space above the button */
+  align-self: center;
+  margin-top: 20px;
 }
 
 .postButton:hover {
