@@ -8,6 +8,8 @@ interface Job {
   id: number;
   position: string;
   company_name: string;
+  location_restriction: string;
+  tags: string;
   // Add other properties as needed
 }
 
@@ -36,7 +38,7 @@ export default function Home() {
       <div>
         <div className=" h-20xl max-w-18xl bg-white size-5xl">
           <div
-        className="relative isolate overflow-hidden h-screen bg-white px-6 pt-40 text-center sm:px-18 sm:shadow-sm">
+        className="relative isolate overflow-hidden  bg-white mb-20 px-6 pt-40 text-center sm:px-18 sm:shadow-sm">
         <p className="mx-auto  max-w-6xl text-5xl font-Nunito font-semibold tracking-tight text-gray-900 ">
         "Where Employers and Job Seekers Meet" <br/> Explore Opportunities Now
         </p>
@@ -74,21 +76,25 @@ export default function Home() {
         </div>
         
     </div>
+    <div>
+    <div className="flex justify-center p-4">
+            <ul className="space-y-4 w-full flex flex-col items-center">
+              {jobs.map((job) => (
+                <li key={job.id} className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-3/4 lg:w-2/3 xl:w-1/2 transition-transform transform hover:scale-105">
+                  <h3 className="text-lg font-bold mb-2">{job.position}</h3>
+                  <p className="text-gray-700 mb-2">{job.company_name}</p>
+                  <p className="text-gray-500 mb-2">{job.location_restriction}</p>
+                  <p className="text-gray-400">{job.tags}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
     
     
 </div>
 
-        <div>
-          
-        <ul>
-          {jobs.map((job) => (
-            <li key={job.id}>
-              <h3>{job.position}</h3>
-              <p>{job.company_name}</p>
-            </li>
-          ))}
-        </ul>
-        </div>
+        
       </div>
     </main>
   );
