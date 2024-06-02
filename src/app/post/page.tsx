@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './post.module.css';
-import axios from 'axios';
+import Axios from 'axios';
 
-const Post = () => {
+function Post() {
   const [formData, setFormData] = useState({
     companyName: '',
     position: '',
@@ -28,11 +28,12 @@ const Post = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-  
+
 
   const handleSubmit = async () => {
+    
     try {
-      const res = await axios.post('http://localhost:8000/jobs/register/', formData);
+      const res = await Axios.post('http://localhost:8000/jobs/register/', formData);
       alert('Job profile posted!');
       console.log(res.data);
       // Optionally, you can redirect to another page after successful post
@@ -54,8 +55,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter company name"
             value={formData.companyName}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Position */}
           <label>Position</label>
           <input
@@ -64,8 +64,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter position"
             value={formData.position}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Employment Type */}
           <label>Employment type</label>
           <input
@@ -74,8 +73,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter employment type"
             value={formData.employmentType}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Primary Tag */}
           <label>Primary Tag</label>
           <input
@@ -84,8 +82,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter primary tag"
             value={formData.primaryTag}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Tags, Keywords or Stack */}
           <label>Tags, Keywords or Stack</label>
           <input
@@ -94,8 +91,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter tags, keywords, or stack"
             value={formData.tagsKeywordsStack}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Job Restricted to Locations */}
           <label>Job Restricted to Locations</label>
           <input
@@ -104,31 +100,28 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter job restricted locations"
             value={formData.jobLocations}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Min and Max Salary */}
-<div className={styles.salaryContainer}>
-  <label>Salary Range</label>
-  <div className={styles.salaryInputContainer}>
-    <input
-      type="number"
-      id="minSalary"
-      className={styles.salaryInput}
-      placeholder="Min"
-      value={formData.minSalary}
-      onChange={handleChange}
-    />
-    <span className={styles.salarySeparator}>-</span>
-    <input
-      type="number"
-      id="maxSalary"
-      className={styles.salaryInput}
-      placeholder="Max"
-      value={formData.maxSalary}
-      onChange={handleChange}
-    />
-  </div>
-</div>
+          <div className={styles.salaryContainer}>
+            <label>Salary Range</label>
+            <div className={styles.salaryInputContainer}>
+              <input
+                type="number"
+                id="minSalary"
+                className={styles.salaryInput}
+                placeholder="Min"
+                value={formData.minSalary}
+                onChange={handleChange} />
+              <span className={styles.salarySeparator}>-</span>
+              <input
+                type="number"
+                id="maxSalary"
+                className={styles.salaryInput}
+                placeholder="Max"
+                value={formData.maxSalary}
+                onChange={handleChange} />
+            </div>
+          </div>
 
           {/* Job Description */}
           <label>Job Description</label>
@@ -137,8 +130,7 @@ const Post = () => {
             className={styles.descriptionInput}
             placeholder="Enter job description"
             value={formData.jobDescription}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Benefits */}
           <label>Benefits </label>
           <input
@@ -147,8 +139,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter benefits"
             value={formData.benefits}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Apply Email */}
           <label>Apply email</label>
           <input
@@ -157,8 +148,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter apply email"
             value={formData.applyEmail}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Apply  URL */}
           <label>Apply URL</label>
           <input
@@ -167,8 +157,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter apply URL"
             value={formData.applyEmailURL}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* How to Apply */}
           <label>How to Apply </label>
           <textarea
@@ -176,8 +165,7 @@ const Post = () => {
             className={styles.descriptionInput}
             placeholder="Enter how to apply"
             value={formData.howToApply}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Company Twitter */}
           <label>Company Twitter</label>
           <input
@@ -186,8 +174,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter company Twitter"
             value={formData.companyTwitter}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Company Email */}
           <label>Company Email</label>
           <input
@@ -197,8 +184,7 @@ const Post = () => {
             placeholder="Enter company email"
             value={formData.companyEmail}
             onChange={handleChange}
-            required
-          />
+            required />
           {/* Invoice Email */}
           <label>Invoice Email</label>
           <input
@@ -207,8 +193,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter invoice email"
             value={formData.invoiceEmail}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Invoice Address */}
           <label>Invoice Address</label>
           <input
@@ -217,8 +202,7 @@ const Post = () => {
             className={styles.nameInput}
             placeholder="Enter invoice address"
             value={formData.invoiceAddress}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Feedback Box */}
           <label>Feedback Box</label>
           <textarea
@@ -226,8 +210,7 @@ const Post = () => {
             className={styles.descriptionInput}
             placeholder="Enter your feedback"
             value={formData.feedbackBox}
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           {/* Button to submit the form */}
           <button className={styles.postButton} onClick={handleSubmit}>
             Post
@@ -236,6 +219,6 @@ const Post = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Post;
