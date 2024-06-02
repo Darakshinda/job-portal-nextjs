@@ -16,7 +16,7 @@ const DropdownMenu = ({ label, options }) => {
   };
 
   return (
-    <div className="relative inline-block text-left mx-2">
+    <div className="relative inline-block text-left mx-2 z-100">
       <div>
         <button
           type="button"

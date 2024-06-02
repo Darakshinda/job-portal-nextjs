@@ -10,6 +10,7 @@ interface Job {
   company_name: string;
   location_restriction: string;
   tags: string;
+  created_at: string;
   // Add other properties as needed
 }
 
@@ -32,13 +33,30 @@ export default function Home() {
     fetchData();
   }, []);
 
+
+  const getTimeDifference = (createdAt: string) => {
+    const currentTime = new Date();
+    const createdAtTime = new Date(createdAt);
+    const timeDifference = currentTime.getTime() - createdAtTime.getTime();
+    const minutes = Math.floor(timeDifference / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    if (days > 0) {
+      return `${days}d`;
+    } else if (hours > 0) {
+      return `${hours}h`;
+    } else {
+      return `${minutes}m`;
+    }
+  };
+
   return (
     <main>
       <Navbar/>
       <div>
         <div className=" h-20xl max-w-18xl bg-white size-5xl">
           <div
-        className="relative isolate overflow-hidden  bg-white mb-20 px-6 pt-40 text-center sm:px-18 sm:shadow-sm">
+        className="relative isolate overflow-hidden  bg-white pb-20 px-6 pt-40 text-center sm:px-18 sm:shadow-sm">
         <p className="mx-auto  max-w-6xl text-5xl font-Nunito font-semibold tracking-tight text-gray-900 ">
         "Where Employers and Job Seekers Meet" <br/> Explore Opportunities Now
         </p>
@@ -68,7 +86,7 @@ export default function Home() {
             </label>
         </form>
         
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-8 z-100">
           <DropdownMenu label="Location" options={['New York', 'Los Angeles', 'Chicago']} />
           <DropdownMenu label="Salary" options={['$40k-$60k', '$60k-$80k', '$80k-$100k']} />
           <DropdownMenu label="Tags" options={['Engineering', 'Design', 'Marketing']} />
@@ -78,17 +96,36 @@ export default function Home() {
     </div>
     <div>
     <div className="flex justify-center p-4">
-            <ul className="space-y-4 w-full flex flex-col items-center">
-              {jobs.map((job) => (
-                <li key={job.id} className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-3/4 lg:w-2/3 xl:w-1/2 transition-transform transform hover:scale-105">
-                  <h3 className="text-lg font-bold mb-2">{job.position}</h3>
-                  <p className="text-gray-700 mb-2">{job.company_name}</p>
-                  <p className="text-gray-500 mb-2">{job.location_restriction}</p>
-                  <p className="text-gray-400">{job.tags}</p>
-                </li>
-              ))}
-            </ul>
+  <ul className="space-y-4 w-full flex flex-col items-center">
+    {jobs.map((job) => (
+      <li key={job.id} className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start">
+        <div className="flex justify-between w-full mb-2">
+          <h3 className="text-lg font-bold">{job.position}</h3>
+          
+          
+        </div>
+          <div className="flex items-center w-full mb-2">
+            <div className="w-2/5">
+              <p className="text-gray-700">{job.company_name}</p>
+            </div>
+            {job.tags && job.tags.split(',').map((tag, index) => (
+              <div key={index} className="border border-gray-300 rounded-md p-1 ml-2"> 
+                <p className="text-black-400">{tag.trim()}</p> 
+              </div>
+            ))}
+          <div className="ml-auto flex items-center"> 
+            <p className="text-black-500 mr-32">{getTimeDifference(job.created_at)}</p> 
+            <button className="border border-gray-300 rounded-md px-2 py-2 w-16">Apply</button>
           </div>
+        </div>
+
+        <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center">{job.location_restriction}</p>
+
+      </li>
+    ))}
+  </ul>
+</div>
+
         </div>
     
     
