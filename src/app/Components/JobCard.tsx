@@ -1,5 +1,4 @@
 import React from "react";
-
 interface JobCardProps {
   id: number;
   position: string;
