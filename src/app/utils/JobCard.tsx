@@ -8,13 +8,21 @@ interface JobCardProps {
   created_at: string;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ id, position, company_name, location_restriction, tags, created_at }) => {
+const JobCard: React.FC<JobCardProps> = ({
+  id,
+  position,
+  company_name,
+  location_restriction,
+  tags,
+  created_at,
+}) => {
   const getTimeDifference = (createdAt: string) => {
     const currentTime = new Date();
     const createdAtTime = new Date(createdAt);
     const timeDifference = currentTime.getTime() - createdAtTime.getTime();
 
-    if (timeDifference < 5000) { // If less than 5 seconds
+    if (timeDifference < 5000) {
+      // If less than 5 seconds
       return "Just now";
     }
 
@@ -42,17 +50,27 @@ const JobCard: React.FC<JobCardProps> = ({ id, position, company_name, location_
         <div className="w-2/5">
           <p className="text-gray-700">{company_name}</p>
         </div>
-        {tags && tags.split(',').map((tag, index) => (
-          <div key={index} className="border border-gray-300 rounded-md p-1 ml-2">
-            <p className="text-black-400">{tag.trim()}</p>
-          </div>
-        ))}
+        {tags &&
+          tags.split(",").map((tag, index) => (
+            <div
+              key={index}
+              className="border border-gray-300 rounded-md p-1 ml-2"
+            >
+              <p className="text-black-400">{tag.trim()}</p>
+            </div>
+          ))}
         <div className="ml-auto flex items-center">
-          <p className="text-black-500 mr-32">{getTimeDifference(created_at)}</p>
-          <button className="border border-gray-300 rounded-md px-2 py-2 w-16">Apply</button>
+          <p className="text-black-500 mr-32">
+            {getTimeDifference(created_at)}
+          </p>
+          <button className="border border-gray-300 rounded-md px-2 py-2 w-16">
+            Apply
+          </button>
         </div>
       </div>
-      <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center">{location_restriction}</p>
+      <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center">
+        {location_restriction}
+      </p>
     </li>
   );
 };

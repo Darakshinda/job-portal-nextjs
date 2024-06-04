@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import JobCard from "./JobCard";
+import JobCard from "../utils/JobCard";
 
 // Define an interface representing the structure of a job object
 interface Job {
@@ -20,7 +20,9 @@ const JobList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/jobs/job-list/");
+        const response = await axios.get(
+          "http://localhost:8000/jobs/job-list/"
+        );
         setJobs(response.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -34,7 +36,7 @@ const JobList: React.FC = () => {
     <div className="flex justify-center p-4">
       <ul className="space-y-4 w-full flex flex-col items-center">
         {jobs.map((job) => (
-          <JobCard 
+          <JobCard
             key={job.id}
             id={job.id}
             position={job.position}

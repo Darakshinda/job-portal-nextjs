@@ -10,7 +10,8 @@ export default function Home() {
         <div className="pb-4 h-20xl max-w-18xl bg-white size-5xl">
           <div className="relative isolate overflow-hidden bg-white pb-20 px-6 pt-40 text-center sm:px-18 sm:shadow-sm">
             <p className="mx-auto max-w-6xl text-5xl font-Nunito font-semibold tracking-tight text-gray-900">
-              "Where Employers and Job Seekers Meet" <br /> Explore Opportunities Now
+              "Where Employers and Job Seekers Meet" <br /> Explore
+              Opportunities Now
             </p>
 
             <form action="/search">
@@ -38,7 +39,7 @@ export default function Home() {
               </label>
             </form>
           </div>
-          <JobList/>
+          <JobList />
         </div>
       </div>
     </main>
