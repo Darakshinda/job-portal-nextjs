@@ -1,4 +1,6 @@
 import React from "react";
+import { getTimeDifference } from "../utils/timeutils";
+
 interface JobCardProps {
   id: number;
   position: string;
@@ -16,31 +18,6 @@ const JobCard: React.FC<JobCardProps> = ({
   tags,
   created_at,
 }) => {
-  const getTimeDifference = (createdAt: string) => {
-    const currentTime = new Date();
-    const createdAtTime = new Date(createdAt);
-    const timeDifference = currentTime.getTime() - createdAtTime.getTime();
-
-    if (timeDifference < 5000) {
-      // If less than 5 seconds
-      return "Just now";
-    }
-
-    const minutes = Math.floor(timeDifference / 60000);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 0) {
-      return `${days}d`;
-    } else if (hours > 0) {
-      return `${hours}h`;
-    } else if (minutes > 0) {
-      return `${minutes}m`;
-    } else {
-      return `${timeDifference / 1000}s`; // Convert milliseconds to seconds
-    }
-  };
-
   return (
     <li className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start">
       <div className="flex justify-between w-full mb-2">
