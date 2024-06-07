@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dropdown.css';
+
 
 interface Props {
  
@@ -35,8 +35,8 @@ export const Dropdown = ({bgcolor="base",btncolor="base",
     <div className={cls}>
   <div tabIndex={0} role="button" className="btn m-1" style={{backgroundColor:`${btncolor}`}}>Click</div>
   <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52`} style={{backgroundColor:`${bgcolor}`}}>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
+    <li><button onClick={()=>console.log("clicked 1")}>Item 1</button></li>
+    <li><button onClick={()=>console.log("clicked 2")}>Item 2</button></li>
   </ul>
 </div>
   );
