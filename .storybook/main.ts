@@ -1,6 +1,7 @@
 import type { StorybookConfig } from "@storybook/nextjs";
 
 
+
 webpackFinal: async (config) => {
   config.module.rules.push({
     test: /\.scss$/,

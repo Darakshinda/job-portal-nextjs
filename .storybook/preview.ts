@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import '../src/stories/tailwind.css';
 import '@storybook/addon-console';
 
+
 const preview: Preview = {
   parameters: {
     controls: {
