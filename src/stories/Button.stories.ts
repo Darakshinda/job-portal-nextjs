@@ -2,22 +2,38 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button } from './Button';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c25f409b180f22d79e8446cba163b9965006370f
 const meta = {
   title: 'Example/Button',
   component: Button,
   parameters: {
+<<<<<<< HEAD
+=======
+
+>>>>>>> c25f409b180f22d79e8446cba163b9965006370f
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
     backgroundColor: { control: 'color' },
   },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> c25f409b180f22d79e8446cba163b9965006370f
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c25f409b180f22d79e8446cba163b9965006370f
 export const b1: Story = {
   args: {
     cls: "btn btn-primary"
@@ -210,3 +226,7 @@ export const b5: Story = {
       cls: "btn btn-block"
     },
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> c25f409b180f22d79e8446cba163b9965006370f

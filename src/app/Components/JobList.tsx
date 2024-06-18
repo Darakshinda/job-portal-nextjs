@@ -70,7 +70,7 @@ const JobList: React.FC = () => {
           }) => (
             <JobCard
               key={id}
-              id={id}
+              //id={id}
               position={position}
               company_name={company_name}
               location_restriction={location_restriction}
