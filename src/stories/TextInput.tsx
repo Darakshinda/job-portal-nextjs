@@ -49,7 +49,7 @@ export const TextArea = ({
   onChange,
 }: TextAreaProps) => {
   return (
-    <textarea
+    <textarea style={{height:"250px"}}
       required={req}
       className={cls}
       placeholder={placeholder}

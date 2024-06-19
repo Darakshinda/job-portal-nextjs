@@ -6,6 +6,7 @@ import {JobCard} from "../../stories/Job-Card";
 import {Form} from "../Components/Form";
 import {NavBar} from "../../stories/NavBar";
 import { title } from "process";
+import JoditEditorComponent from '../Components/Jodit-Editor';
 
 /**
  * Primary UI component for user interaction
@@ -346,14 +347,15 @@ import { title } from "process";
   
   const sarr=str.split("\n").map((tag, index) => {out+=`{"label":"`;out+=tag.substring(0, tag.indexOf("<"));out+=`"},`});console.log(out);
 
-  const str1=`🦁 Africa </option><option value="region_AS">
+  const str1=`REGION<
+🦁 Africa </option><option value="region_AS">
 ⛩ Asia </option><option value="region_EU">
 🇪🇺 Europe </option><option value="region_LA">
 💃 Latin America </option><option value="region_ME">
 🕌 Middle East </option><option value="region_NA">
 ⛰️ North America </option><option value="region_OC">
 🌊 Oceania </option> </optgroup>
-<optgroup label="Countries">
+COUNTRIES<optgroup label="Countries">
 <option value="AF">
 🇦🇫 Afghanistan </option><option value="AL">
 🇦🇱 Albania </option><option value="DZ">
@@ -613,7 +615,7 @@ let out1="";
 const sarr1=str1.split("\n").map((tag, index) => {out1+=`{"label":"`;out1+=tag.substring(0, tag.indexOf("<"));out1+=`"},`});console.log(out1);
 
 export default function Home() {
-  const [tgs, settgs] = React.useState('');const [tgs1, settgs1] = React.useState('');
+  const [tgs15, settgs15] = React.useState('');const [tgs16, settgs16] = React.useState('');
   
   const [v11, set11] = useState<string>('');const handle11 = (event: React.ChangeEvent<HTMLInputElement>) => {set11(event.target.value);};
   const [v12, set12] = useState<string>('');const handle12 = (event: React.ChangeEvent<HTMLInputElement>) => {set12(event.target.value);};
@@ -627,9 +629,12 @@ export default function Home() {
   const [v25, set25] = useState<string>('');const handle25 = (event: React.ChangeEvent<HTMLInputElement>) => {set25(event.target.value);};
 
   const [v31, set31] = useState<string>('');const handle31 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {set31(event.target.value);};
+
+  const [v41a, set41a] = useState<string>('');const handle41a = (event: React.ChangeEvent<HTMLSelectElement>) => {set41a(event.target.value);};
+  const [v41b, set41b] = useState<string>('');const handle41b = (event: React.ChangeEvent<HTMLSelectElement>) => {set41b(event.target.value);};
   console.log(v23);
 
-
+  const [content, setContent] = useState<string>('Start typing...');
 
 
 const f1={lbl:"LET'S START",
@@ -637,8 +642,8 @@ const f1={lbl:"LET'S START",
   ,{type:1,hdg:"POSITION*",body:"Manager",desc:` Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". We know your job is important but please DO NOT WRITE IN FULL CAPS. If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.`,val:v12,handle:handle12,},
   {type:3,hdg:"EMPLOYMENT TYPE*",body:"Full-time<Part-time<Contractor<Temporary<Internship<Per diem<Volunteer<Onsite",desc:"",val:v13,handle:handle13,},
   {type:3,hdg:"PRIMARY TAG",body:"Software Development<Customer Support<Sales<Marketing<Design<Front End<Back End<Legal<Testing<Quality Assurance<Non-Tech<Other",desc:"This primary tag shows first and increases visibility in the main sections. Your job is shown on every page that is tagged with though. E.g. if you tag it as PHP, it shows for Remote PHP Jobs etc.",val:v14,handle:handle14,},
-  {type:4,hdg:"TAGS, KEYWORDS OR STACK*",body:`[${out.slice(0, -1)}]`,desc:`Short tags are preferred. Use tags like industry and tech stack. The first 3 or 4 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also sometimes generate tags automatically after you post/edit to supplement.`,settgs:settgs},
-  {type:4,hdg:"JOB IS RESTRICTED TO LOCATIONS?",body:`[${out1.slice(0, -1)}]`,desc:`If you'd only like to hire people from a specific location or timezone this remote job is restricted to (e.g. Europe, United States or Japan). If not restricted, please leave it as "Worldwide". The less restricted this is, the more applicants you will get. Keeping it "Worldwide" is highly recommended as you'll have access to a worldwide pool of talent. To promote fairness in remote work positions, worldwide jobs are ranked higher.`,settgs:settgs1},
+  {type:4,hdg:"TAGS, KEYWORDS OR STACK*",body:`[${out.slice(0, -1)}]`,desc:`Short tags are preferred. Use tags like industry and tech stack. The first 3 or 4 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also sometimes generate tags automatically after you post/edit to supplement.`,settgs:settgs15},
+  {type:4,hdg:"JOB IS RESTRICTED TO LOCATIONS?",body:`[${out1.slice(0, -1)}]`,desc:`If you'd only like to hire people from a specific location or timezone this remote job is restricted to (e.g. Europe, United States or Japan). If not restricted, please leave it as "Worldwide". The less restricted this is, the more applicants you will get. Keeping it "Worldwide" is highly recommended as you'll have access to a worldwide pool of talent. To promote fairness in remote work positions, worldwide jobs are ranked higher.`,settgs:settgs16},
 
 ],
 }
@@ -651,17 +656,27 @@ const f2={lbl:"COMPANY",
 
   ],
 }
-const f3={lbl:"FEEDBACK BOX",val:v31,handle:handle31,fields:[{type:2,hdg:"FEEDBACK ABOUT REMOTE OK",body:"",desc:"This isn't part of the job post. If you have any feature requests or general feedback about posting a job Remote OK, leave it here. Please be radically honest, I'm always improving the site and act on your feedback fast. It's most important that you're happy with the site and I want you to keep coming back to post here! This feedback box gets sent straight to my phone wherever I am. -Pieter Levels, Founder of Remote OK"}]}
+const f3={lbl:"FEEDBACK BOX",fields:[{type:2,hdg:"FEEDBACK ABOUT REMOTE OK",body:"",desc:"This isn't part of the job post. If you have any feature requests or general feedback about posting a job Remote OK, leave it here. Please be radically honest, I'm always improving the site and act on your feedback fast. It's most important that you're happy with the site and I want you to keep coming back to post here! This feedback box gets sent straight to my phone wherever I am. -Pieter Levels, Founder of Remote OK",val:v31,handle:handle31,}]}
 
-  return (
+const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
+const c=b.split(",USD").join("<USD");console.log(c);
+const f4={lbl:"JOB DETAILS",fields:[{type:5,hdg:"ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*",body:`Minimum per year,${c}&&Maximum per year,${c}`,desc:"It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.",}]}
+
+return (
     <main className="bg-base-100">
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full">
-       <JobCard imgflg bdg cls="card glass" position={v12} company_name={v11} location_restriction="Faridabad" tags={tgs} created_at="5/17/2024 23:11:25"/></main>
+       <JobCard imgflg bdg cls="card glass" position={v12} company_name={v11} location_restriction={tgs16} tags={tgs15} created_at="5/17/2024 23:11:25"/></main>
        <NavBar endIcon={false} post={true}/>
        <Form title={f1.lbl} items={f1.fields}/>
        <Form title={f2.lbl} items={f2.fields}/>
+       <Form title={f4.lbl} items={f4.fields}/>
        <Form title={f3.lbl} items={f3.fields}/>
-       <div style={{height:"300px"}}></div>
+       <div style={{height:"300px"}}><h1>Jodit Editor Example</h1>
+      <JoditEditorComponent value={content} onChange={setContent} />
+      <div>
+        <h2>Content:</h2>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </div></div>
      
     </main>
     

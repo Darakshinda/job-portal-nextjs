@@ -45,6 +45,7 @@ const JobCard: React.FC<JobCardProps> = ({
           </button>
         </div>
       </div>
+      
       <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center">
         {location_restriction}
       </p>

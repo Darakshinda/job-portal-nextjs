@@ -35,6 +35,19 @@ if(index==4) return(<div
   <p className="text-black-400">...</p>
 </div>);
 }
+const tdisp1 = ({tag="",index=0}:tprop)=>
+  {
+    if(index<4)
+    return(<div className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center ml-[1%]" style={{ display:"inline"}}>
+      {tag.trim()}
+    </div>);
+  if(index==4) return(<div  style={{ display:"inline"}}
+    key={-1}
+    className="p-1 ml-2 text-black-400"
+  >
+  ...
+  </div>);
+  }
 
 export const JobCard = ({cls="",bdg = false,imgflg=false,divcls="flex justify-between w-full mb-2",popup=false,top=true,fgcls="",bgcolor="",
   imgsrc="https://media.dev.to/cdn-cgi/image/width=1600,height=900,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fwhh1lpihw7h587pb2iuc.png",position,
@@ -85,9 +98,11 @@ export const JobCard = ({cls="",bdg = false,imgflg=false,divcls="flex justify-be
           </button>
         </div>
       </div>
-      <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center" style={{borderColor:"black"}}>
-        {location_restriction}
-      </p>
+      <div  style={{ width:"800px"}}>
+      {location_restriction &&
+          location_restriction.split(",").map((tag, index) => (tdisp1({tag,index})
+          ))}</div>
+      
    
   </li>
   );

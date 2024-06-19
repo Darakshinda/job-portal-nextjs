@@ -23,8 +23,7 @@ interface Props {
 
 export const Form = ({title="",items=[]}: Props) => {
   const [vale, setvale] = useState<string>('');const handleit = (event: React.ChangeEvent<HTMLSelectElement>) => {setvale(event.target.value);};
-  const b=`[{"label":"Rahul"}]`;
-  const a=JSON.parse(b);console.log(a.object);
+
   console.log(vale);
 
  return (
@@ -41,6 +40,11 @@ export const Form = ({title="",items=[]}: Props) => {
   {type==2 &&<TextArea val={val} placeholder={`${body}`} onChange={handle} req={true} cls="input_company"/>}
   {type==3 &&<Select onChange={handle}req={true} cls="input_company" body={body}/>}
   {type==4 && <Tags cls="input_company" settgs={settgs} dynamic={true} value={vale} onChange={handleit} options={JSON.parse(body)}/>}
+  {type==5 && <div style={{marginLeft:"18%"}}>
+   <div style={{display:"inline"}}><Select onChange={handle}req={true} cls="input_company" body={body.split("&&")[0]} type={5} /></div> 
+    <a style={{display:"inline",fontSize:"30px",marginLeft:"1%"}}>{`-`}</a>
+    <div style={{display:"inline"}}><Select onChange={handle}req={true} cls="input_company" body={body.split("&&")[1]} type={5} /></div> 
+    </div>}
   
   <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>
     {desc}

@@ -108,3 +108,9 @@ div.group span.head {
 select option {
   background: rgb(255, 255, 255);
 }
+
+#myDiv {
+  position: absolute; /* or 'fixed', 'relative' */
+  z-index: 1000; /* a high value to ensure it's on top */
+  background-color: yellow; /* for visibility */
+}
