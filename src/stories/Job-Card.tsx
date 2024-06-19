@@ -20,7 +20,7 @@ interface tprop
  * Primary UI component for user interaction
  */
 const tdisp = ({tag="",index=0}:tprop)=>
-{console.log(index);
+{
   if(index<4)
   return(<div
   key={index}
@@ -71,7 +71,7 @@ export const JobCard = ({cls="",bdg = false,imgflg=false,divcls="flex justify-be
               </div>
             </div>}
         <div className="w-2/5">
-          <div className="text-gray-700">{company_name}{bdg&&<div className="badge badge-secondary inline ml-[5%]">NEW</div>}</div>
+          <div className="text-gray-700" ><a className='font-serif font-bold'>{company_name}</a>{bdg&&<div className="badge badge-secondary inline ml-[5%]">NEW</div>}</div>
         </div>
         {tags &&
           tags.split(",").map((tag, index) => (tdisp({tag,index})

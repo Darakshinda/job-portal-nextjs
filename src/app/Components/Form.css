@@ -103,4 +103,8 @@ div.group span.head {
   margin-top:10px;
 }
 
-.input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;}
+.input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}
+
+select option {
+  background: rgb(255, 255, 255);
+}

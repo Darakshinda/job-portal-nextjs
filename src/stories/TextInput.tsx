@@ -1,32 +1,41 @@
+"use client"
+
 import React from 'react';
+
+
 
 interface InputProps {
   cls?: string;
   placeholder?: string;
-  value?: string;
+  req?:boolean;
+  val?: string;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface TextAreaProps {
   cls?: string;
+  req?:boolean;
   placeholder?: string;
-  value?: string;
+  val?: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 } 
-export const TextInput = ({
+export const TextInput = (
+  {
   cls = 'input w-full max-w-xs',
   placeholder = 'Type here',
-  value,
+  val,req=false,
   disabled = false,
   onChange,
 }: InputProps) => {
+
   return (
     <input
       type="text"
+      required={req}
       className={cls}
       placeholder={placeholder}
-      value={value}
+      value={val}
       disabled={disabled}
       onChange={onChange}
     />
@@ -36,14 +45,15 @@ export const TextInput = ({
 export const TextArea = ({
   cls = 'textarea w-full max-w-xs',
   placeholder = 'Description',
-  value,
+  val,req=false,
   onChange,
 }: TextAreaProps) => {
   return (
     <textarea
+      required={req}
       className={cls}
       placeholder={placeholder}
-      value={value}
+      value={val}
       onChange={onChange}
     />
   );
