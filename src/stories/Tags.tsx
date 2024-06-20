@@ -1,133 +1,150 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Tag from '@/app/Components/Tag';
 import ClickOutsideDiv from '@/app/Components/ClcikoutsideDiv';
-
-import { useState } from 'react';
 
 interface Option {
   label: string;
 }
 
 interface Props {
- 
-    closeable?:boolean;linktg?:boolean;color?:string;dynamic?:boolean;size?:string;value: string;
-    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;settgs?:Function;
-    cls?: string;
-    options: Option[];
-    req?: boolean;
-    placeholder?: string;
-  }
+  closeable?: boolean;
+  linktg?: boolean;
+  color?: string;
+  dynamic?: boolean;
+  size?: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  settgs?: Function;
+  cls?: string;
+  options: Option[];
+  req?: boolean;
+  placeholder?: string;
+}
 
 let mySet: Set<string> = new Set();
-  export const Tags = ({closeable=false,linktg=false,color="white",dynamic=false,size="sm",cls = 'select',settgs=()=>{},
-    value,
-    onChange,
-    placeholder="Type a tag or keyword to search and add it",
-    options,
-    req = false,}: Props) => 
-      {
-       
-        const [searchTerm, setSearchTerm] = useState('');
-        const [sel, setsel] = useState(0);
-       
-        mySet.forEach((item) => {
-          console.log(item);
-      });
-      const filt=(option:Option,)=>{
-        console.log(mySet.has(option.label));
-        return (option.label.toLowerCase().includes(searchTerm.toLowerCase())||option.label=="REGION"||option.label=="COUNTRIES")&&!mySet.has(option.label);}
-      
-        const filteredOptions = options.filter(option =>
-          filt(option)
-        );
 
-    const [tags, setTags] = React.useState([]);
-  const [typing, setTyping] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState("$$");
+export const Tags = ({
+  closeable = false,
+  linktg = false,
+  color = 'white',
+  dynamic = false,
+  size = 'sm',
+  cls = 'select',
+  settgs = () => {},
+  value,
+  onChange,
+  placeholder = 'Type a tag or keyword to search and add it',
+  options,
+  req = false,
+}: Props) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sel, setSel] = useState(0);
+  const [tags, setTags] = useState<string[]>([]);
 
-  settgs(tags.join(","));
+  useEffect(() => {
+    settgs(tags.join(','));
+  }, [tags]);
+
+  const filt = (option: Option) => {
+    return (
+      (option.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        option.label === 'REGION' ||
+        option.label === 'COUNTRIES') &&
+      !mySet.has(option.label)
+    );
+  };
+
+  const filteredOptions = options.filter((option) => filt(option));
 
   const handleOutsideClick = () => {
-    console.log('Clicked outside the div');setsel(0);setSearchTerm("");
+    setSel(0);
+    setSearchTerm('');
   };
-   
 
-  const removeTag = (tag:string) => {
+  const removeTag = (tag: string) => {
     mySet.delete(tag);
-    const nextTags = tags.filter(item => item !== tag);
+    const nextTags = tags.filter((item) => item !== tag);
     setTags(nextTags);
   };
 
-  const addTag = () => {
-    console.log(`hello ${searchTerm}`)
-    const nextTags = searchTerm ? [...tags, searchTerm] : tags;
-    setTags(nextTags);
-    setTyping(false);setInputValue("$$");setSearchTerm("");
-
+  const addTag = (tag: string) => {
+    mySet.add(tag);
+    setTags((prevTags) => [...prevTags, tag]);
+    setSearchTerm('');
   };
 
-  const handleButtonClick = () => {
-    setTyping(true);
-  };
-  console.log(`@@${inputValue} ${searchTerm}`);
-  if(inputValue=="done") addTag();
   const renderInput = () => {
-   
-      return (
-        <div style={{display:"inline"}}>
+    return (
       <input
         type="text"
-        className={`search-input ${cls}`} style={{width:"350px",borderStyle:"none"}}
+        className={`search-input ${cls} w-full border-none p-2 rounded-full border border-gray-300 placeholder-black`}
         placeholder={placeholder}
         value={searchTerm}
-        onChange={e => {setSearchTerm(e.target.value);setsel(1);}} onClick={e=>setsel(1)}
-      /></div>
-      );
-   
-
-  };
-  const fun=(option:Option)=>{
-    if(option.label=="REGION"||option.label=="COUNTRIES") return(<div><br/><p><b>{option.label}</b></p><br/></div>);
-      if(option.label!="") return(
-    <li><button onClick={()=>{setInputValue("done");setSearchTerm(option.label);setsel(0);mySet.add(option.label);}}>{option.label}</button></li>);}
-  
-    const printtag=(item:string,index:number)=>{
-      return(
-        <Tag tag={{label:item}} key={index} onRemove={() => removeTag(item)}>
-          {item}
-        </Tag>
-      )}
-  
-  if(size=="lg")
-    return(
-    <Tag closable={closeable} className="badge badge-outline bg-yellow-100" style={{backgroundColor:`${color}`,height:"40px",width:"66px"}}>
-        {linktg&&<a target="_blank" href="https://rsuitejs.com" rel="noreferrer">Link-Tag</a>}
-        {!linktg&&"Tag"}
-    </Tag>);
-
-   if(size=="md")
-    return(
-    <Tag closable={closeable} size="sm" className="badge badge-outline bg-yellow-100" style={{backgroundColor:`${color}`,height:"30px",width:"50px"}}>
-        {linktg&&<a target="_blank" href="https://rsuitejs.com" rel="noreferrer">Link-Tag</a>}
-        {!linktg&&"Tag"}
-    </Tag>);
-
-  if(!dynamic) 
-    return(
-    <Tag closable={closeable} className="badge badge-outline bg-yellow-100" style={{backgroundColor:`${color}`}}>
-        {linktg&&<a target="_blank" href="https://rsuitejs.com" rel="noreferrer">Link-Tag</a>}
-        {!linktg&&"Tag"}
-    </Tag>);
-   
-  
-  return (
-    <ClickOutsideDiv onOutsideClick={handleOutsideClick}><div  className={`searchable-select ${cls}`} style={{justifyItems:"center",backgroundSize:"cover",}}>
-    {tags.map((item, index) => printtag(item,index))}
-    {renderInput()}
-  </div>
-  {sel==1 && <div role="listbox" className="myDiv" style={{zIndex:"500px"}}><ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box`} style={{backgroundColor:`white`,marginLeft:"1%",zIndex:"20000px", maxWidth:"95%"}}>
-  {filteredOptions.map(option => fun(option))}
-</ul></div>}</ClickOutsideDiv>
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setSel(1);
+        }}
+        onClick={(e) => setSel(1)}
+      />
     );
-  
   };
+
+  const renderOption = (option: Option) => {
+    if (option.label === 'REGION' || option.label === 'COUNTRIES') {
+      return (
+        <div key={option.label}>
+          <br />
+          <p>
+            <b>{option.label}</b>
+          </p>
+          <br />
+        </div>
+      );
+    }
+    return (
+      <li key={option.label}>
+        <button
+          className="block px-4 py-2 text-left w-full"
+          onClick={() => {
+            addTag(option.label);
+            setSel(0);
+          }}
+        >
+          {option.label}
+        </button>
+      </li>
+    );
+  };
+
+  const renderSelectedTags = () => {
+    return (
+      <div className="flex flex-wrap mt-2">
+        {tags.map((item, index) => (
+          <Tag tag={{ label: item }} key={index} onRemove={() => removeTag(item)}>
+            {item}
+          </Tag>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <ClickOutsideDiv onOutsideClick={handleOutsideClick}>
+      <div className={`searchable-select ${cls} border border-gray-300 rounded-full max-w-md overflow-hidden`}>
+        <div className="flex items-center">
+          {renderInput()}
+        </div>
+        {sel === 1 && (
+          <div className="absolute bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-50 w-full max-w-md">
+            <ul className="menu p-2 max-w-full">
+              {filteredOptions.map((option) => renderOption(option))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className="mt-2 max-w-md">
+        {renderSelectedTags()}
+      </div>
+    </ClickOutsideDiv>
+  );
+};

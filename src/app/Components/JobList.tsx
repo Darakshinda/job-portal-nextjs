@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import JobCard from "./JobCard";
 
-// Define an interface representing the structure of a job object
 interface Job {
   id: number;
   position: string;
@@ -11,11 +10,20 @@ interface Job {
   location_restriction: string;
   tags: string;
   created_at: string;
-  // Add other properties as needed
 }
 
-const JobList: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[]>([]); // Specify the type of jobs as Job[]
+interface Props {
+  selectedLocationTags: string[];
+  selectedJobTags: string[];
+  selectedBenefitTags: string[];
+}
+
+const JobList: React.FC<Props> = ({
+  selectedLocationTags,
+  selectedJobTags,
+  selectedBenefitTags,
+}) => {
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -27,58 +35,45 @@ const JobList: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `${baseUrl}/jobs/job-list/?limit=${fetchCount}&offset=${(page - 1) * fetchCount}`
-        );
-        setJobs((prevJobs) => [...prevJobs, ...response.data]);
-        setPage((prevPage) => prevPage + 1);
+        let url = `${baseUrl}/jobs/job-list/?limit=${fetchCount}&offset=${(page - 1) * fetchCount}`;
+
+        if (selectedLocationTags.length > 0) {
+          url += `&location=${selectedLocationTags.join(",")}`;
+        }
+        if (selectedJobTags.length > 0) {
+          url += `&position=${selectedJobTags.join(",")}`;
+        }
+        if (selectedBenefitTags.length > 0) {
+          url += `&benefits=${selectedBenefitTags.join(",")}`;
+        }
+
+        const response = await axios.get(url);
+        setJobs(response.data);
+        setPage(1); // Reset page to 1 when fetching new data
       } catch (error) {
         console.error("Error fetching jobs:", error);
       }
       setLoading(false);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !loading) {
-          fetchData();
-        }
-      },
-      { threshold: 1 }
-    );
+    fetchData(); // Fetch data initially
 
-    if (bottomBoundaryRef.current) {
-      observer.observe(bottomBoundaryRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [baseUrl, loading, page]);
+  }, [baseUrl, selectedLocationTags, selectedJobTags, selectedBenefitTags]);
 
   return (
-    <div className="flex justify-center p-4">
+    <div className="flex justify-center p-4 mt-8">
       <ul className="space-y-4 w-full flex flex-col items-center">
-        {jobs.map(
-          ({
-            id,
-            position,
-            company_name,
-            location_restriction,
-            tags,
-            created_at,
-          }) => (
-            <JobCard
-              key={id}
-              id={id}
-              position={position}
-              company_name={company_name}
-              location_restriction={location_restriction}
-              tags={tags}
-              created_at={created_at}
-            />
-          )
-        )}
+        {jobs.map(({ id, position, company_name, location_restriction, tags, created_at }) => (
+          <JobCard
+            key={id}
+            id={id}
+            position={position}
+            company_name={company_name}
+            location_restriction={location_restriction}
+            tags={tags}
+            created_at={created_at}
+          />
+        ))}
         {/* Rendered at the bottom of the list */}
         <li ref={bottomBoundaryRef} />
       </ul>

@@ -1,9 +1,10 @@
+// Home.tsx
 "use client";
-import React from "react";
-import { useState } from "react";
-import Navbar from "./Navbar";
-import JobList from "./Components/JobList";
-import { Tags } from "../stories/Tags"; 
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import JobList from './Components/JobList';
+import { Tags } from '../stories/Tags';
+import SalaryRangeSlider from './Components/FilterBox'; // Import the new component
 
 const locationOptions = [
   { label: 'New York' },
@@ -12,7 +13,6 @@ const locationOptions = [
   { label: 'San Francisco' },
   { label: 'Seattle' },
   { label: 'Boston' },
-  // Add more locations as needed
 ];
 
 const jobPositionOptions = [
@@ -20,7 +20,6 @@ const jobPositionOptions = [
   { label: 'Data Analyst' },
   { label: 'Product Manager' },
   { label: 'UI/UX Designer' },
-  // Add more job positions as needed
 ];
 
 const benefitOptions = [
@@ -28,31 +27,31 @@ const benefitOptions = [
   { label: 'Paid Time Off' },
   { label: 'Retirement Benefits' },
   { label: 'Flexible Working Hours' },
-  // Add more benefits as needed
 ];
 
 const Home: React.FC = () => {
   const [selectedLocationTags, setSelectedLocationTags] = useState<string[]>([]);
   const [selectedJobTags, setSelectedJobTags] = useState<string[]>([]);
   const [selectedBenefitTags, setSelectedBenefitTags] = useState<string[]>([]);
+  const [salaryRange, setSalaryRange] = useState([0, 100000]);
 
   const handleLocationTagSelection = (tags: string[]) => {
     setSelectedLocationTags(tags);
-    console.log('Selected Location Tags:', tags); // Verify selected tags in console
+    console.log('Selected Location Tags:', tags);
   };
 
   const handleJobTagSelection = (tags: string[]) => {
     setSelectedJobTags(tags);
-    console.log('Selected Job Position Tags:', tags); // Verify selected tags in console
+    console.log('Selected Job Position Tags:', tags);
   };
 
   const handleBenefitTagSelection = (tags: string[]) => {
     setSelectedBenefitTags(tags);
-    console.log('Selected Benefit Tags:', tags); // Verify selected tags in console
+    console.log('Selected Benefit Tags:', tags);
   };
 
   const handleSettings = (tags: string[]) => {
-    console.log('Settings:', tags); // Implement settings logic as needed
+    console.log('Settings:', tags);
   };
 
   return (
@@ -89,37 +88,51 @@ const Home: React.FC = () => {
             </label>
           </form>
         </div>
-        <div className="flex gap-4 mt-8">
+        <div className="flex gap-4 justify-center items-center">
           <div>
-            <h3 className="text-lg font-semibold mb-2">Location</h3>
+            <h3 className="text-lg font-semibold mb-2"></h3>
             <Tags
               options={locationOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Location"
               dynamic={true}
+              onSelect={handleLocationTagSelection}
             />
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2">Job Position</h3>
+            <h3 className="text-lg font-semibold mb-2"></h3>
             <Tags
               options={jobPositionOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Job Position"
               dynamic={true}
-
+              onSelect={handleJobTagSelection}
             />
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2">Benefits</h3>
+            <h3 className="text-lg font-semibold mb-2"></h3>
             <Tags
               options={benefitOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Benefits"
               dynamic={true}
+              onSelect={handleBenefitTagSelection}
             />
           </div>
+          <div className= "">
+            <SalaryRangeSlider
+            onRangeChange={setSalaryRange}
+            salaryRange={salaryRange}
+          />
+          </div>
+          
         </div>
-        <JobList />
+        <JobList
+          selectedLocationTags={selectedLocationTags}
+          selectedJobTags={selectedJobTags}
+          selectedBenefitTags={selectedBenefitTags}
+          salaryRange={salaryRange}
+        />
       </div>
     </main>
   );
