@@ -1,60 +1,103 @@
 import React from 'react';
-import { TagGroup, Tag, Input, IconButton } from 'rsuite';import PlusIcon from '@rsuite/icons/Plus';
+import Tag from '@/app/Components/Tag';
+import ClickOutsideDiv from '@/app/Components/ClcikoutsideDiv';
+
+import { useState } from 'react';
+
+interface Option {
+  label: string;
+}
 
 interface Props {
  
-    closeable?:boolean;linktg?:boolean;color?:string;dynamic?:boolean;size?:string;
+    closeable?:boolean;linktg?:boolean;color?:string;dynamic?:boolean;size?:string;value: string;
+    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;settgs?:Function;
+    cls?: string;
+    options: Option[];
+    req?: boolean;
+    placeholder?: string;
   }
 
+let mySet: Set<string> = new Set();
+  export const Tags = ({closeable=false,linktg=false,color="white",dynamic=false,size="sm",cls = 'select',settgs=()=>{},
+    value,
+    onChange,
+    placeholder="Type a tag or keyword to search and add it",
+    options,
+    req = false,}: Props) => 
+      {
+       
+        const [searchTerm, setSearchTerm] = useState('');
+        const [sel, setsel] = useState(0);
+       
+        mySet.forEach((item) => {
+          console.log(item);
+      });
+      const filt=(option:Option,)=>{
+        console.log(mySet.has(option.label));
+        return (option.label.toLowerCase().includes(searchTerm.toLowerCase())||option.label=="REGION"||option.label=="COUNTRIES")&&!mySet.has(option.label);}
+      
+        const filteredOptions = options.filter(option =>
+          filt(option)
+        );
 
-
-  export const Tags = ({closeable=false,linktg=false,color="white",dynamic=false,size="sm",}: Props) => {
-    const [tags, setTags] = React.useState(['Tag 1', 'Tag 2', 'Tag 3']);
+    const [tags, setTags] = React.useState([]);
   const [typing, setTyping] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState("$$");
+
+  settgs(tags.join(","));
+
+  const handleOutsideClick = () => {
+    console.log('Clicked outside the div');setsel(0);setSearchTerm("");
+  };
+   
 
   const removeTag = (tag:string) => {
+    mySet.delete(tag);
     const nextTags = tags.filter(item => item !== tag);
     setTags(nextTags);
   };
 
   const addTag = () => {
-    const nextTags = inputValue ? [...tags, inputValue] : tags;
+    console.log(`hello ${searchTerm}`)
+    const nextTags = searchTerm ? [...tags, searchTerm] : tags;
     setTags(nextTags);
-    setTyping(false);
-    setInputValue('');
+    setTyping(false);setInputValue("$$");setSearchTerm("");
+
   };
 
   const handleButtonClick = () => {
     setTyping(true);
   };
-
+  console.log(`@@${inputValue} ${searchTerm}`);
+  if(inputValue=="done") addTag();
   const renderInput = () => {
-    if (typing) {
+   
       return (
-        <Input
-          className="tag-input"
-          size="xs"
-          style={{ width: 70,marginLeft: "7px",backgroundColor:"#feffef", }}
-          value={inputValue}
-          onChange={setInputValue}
-          onBlur={addTag}
-          onPressEnter={addTag}
-        />
+        <div style={{display:"inline"}}>
+      <input
+        type="text"
+        className={`search-input ${cls}`} style={{width:"350px",borderStyle:"none"}}
+        placeholder={placeholder}
+        value={searchTerm}
+        onChange={e => {setSearchTerm(e.target.value);setsel(1);}} onClick={e=>setsel(1)}
+      /></div>
       );
-    }
+   
 
-    return (
-      <IconButton
-        className="tag-add-btn"
-        onClick={handleButtonClick}
-        icon={<PlusIcon />}
-        appearance="ghost"
-        style={{ marginLeft: "7px" }}
-        size="xs"
-      />
-    );
   };
+  const fun=(option:Option)=>{
+    if(option.label=="REGION"||option.label=="COUNTRIES") return(<div><br/><p><b>{option.label}</b></p><br/></div>);
+      if(option.label!="") return(
+    <li><button onClick={()=>{setInputValue("done");setSearchTerm(option.label);setsel(0);mySet.add(option.label);}}>{option.label}</button></li>);}
+  
+    const printtag=(item:string,index:number)=>{
+      return(
+        <Tag tag={{label:item}} key={index} onRemove={() => removeTag(item)}>
+          {item}
+        </Tag>
+      )}
+  
   if(size=="lg")
     return(
     <Tag closable={closeable} className="badge badge-outline bg-yellow-100" style={{backgroundColor:`${color}`,height:"40px",width:"66px"}}>
@@ -78,14 +121,13 @@ interface Props {
    
   
   return (
-    <div>
-    {tags.map((item, index) => (
-      <Tag key={index} className="badge badge-outline bg-yellow-100" closable onClose={() => removeTag(item)} style={{backgroundColor:`${color}`,display:"inline",marginLeft:"7px"}}>
-        {item}
-      </Tag>
-    ))}
+    <ClickOutsideDiv onOutsideClick={handleOutsideClick}><div  className={`searchable-select ${cls}`} style={{justifyItems:"center",backgroundSize:"cover",}}>
+    {tags.map((item, index) => printtag(item,index))}
     {renderInput()}
   </div>
+  {sel==1 && <div role="listbox" className="myDiv" style={{zIndex:"500px"}}><ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box`} style={{backgroundColor:`white`,marginLeft:"1%",zIndex:"20000px", maxWidth:"95%"}}>
+  {filteredOptions.map(option => fun(option))}
+</ul></div>}</ClickOutsideDiv>
     );
   
   };

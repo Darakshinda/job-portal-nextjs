@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import RazorpayForm from "./RazorpayForm"
+import RazorpayForm from "./RazorpayForm";
 import styles from './RazorpayForm.module.css';
 
 export default function Home() {
