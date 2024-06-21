@@ -50,9 +50,9 @@ const Home: React.FC = () => {
     console.log('Selected Benefit Tags:', tags);
   };
 
-  const handleSettings = (tags: string[]) => {
-    console.log('Settings:', tags);
-  };
+  // const handleSettings = (tags: string[]) => {
+  //   console.log('Settings:', tags);
+  // };
 
   return (
     <main>
@@ -128,10 +128,6 @@ const Home: React.FC = () => {
           
         </div>
         <JobList
-          selectedLocationTags={selectedLocationTags}
-          selectedJobTags={selectedJobTags}
-          selectedBenefitTags={selectedBenefitTags}
-          salaryRange={salaryRange}
         />
       </div>
     </main>
