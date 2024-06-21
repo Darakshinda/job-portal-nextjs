@@ -10,6 +10,7 @@ interface InputProps {
   req?:boolean;
   val?: string;
   disabled?: boolean;
+  event: React.ChangeEvent<HTMLInputElement>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

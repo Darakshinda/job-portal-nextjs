@@ -6,7 +6,8 @@ import {JobCard} from "../../stories/Job-Card";
 import {Form} from "../Components/Form";
 import {NavBar} from "../../stories/NavBar";
 import { title } from "process";
-import JoditEditorComponent from '../Components/Jodit-Editor';
+import { Jodit } from 'jodit-react';
+
 
 /**
  * Primary UI component for user interaction
@@ -615,26 +616,36 @@ let out1="";
 const sarr1=str1.split("\n").map((tag, index) => {out1+=`{"label":"`;out1+=tag.substring(0, tag.indexOf("<"));out1+=`"},`});console.log(out1);
 
 export default function Home() {
-  const [tgs15, settgs15] = React.useState('');const [tgs16, settgs16] = React.useState('');
   
-  const [v11, set11] = useState<string>('');const handle11 = (event: React.ChangeEvent<HTMLInputElement>) => {set11(event.target.value);};
-  const [v12, set12] = useState<string>('');const handle12 = (event: React.ChangeEvent<HTMLInputElement>) => {set12(event.target.value);};
+  
+  const [v11, set11] = useState<string>("");const handle11 = (event: React.ChangeEvent<HTMLInputElement>) => {set11(event.target.value);};
+  const [v12, set12] = useState<string>("");const handle12 = (event: React.ChangeEvent<HTMLInputElement>) => {set12(event.target.value);};
   const [v13, set13] = useState<string>('');const handle13 = (event: React.ChangeEvent<HTMLSelectElement>) => {set13(event.target.value);};
   const [v14, set14] = useState<string>('');const handle14 = (event: React.ChangeEvent<HTMLSelectElement>) => {set14(event.target.value);};
+  const [tgs15, settgs15] = React.useState('');
+  const [tgs16, settgs16] = React.useState('');
 
   const [v21, set21] = useState<string>('');const handle21 = (event: React.ChangeEvent<HTMLInputElement>) => {set21(event.target.value);};
   const [v22, set22] = useState<string>('');const handle22 = (event: React.ChangeEvent<HTMLInputElement>) => {set22(event.target.value);};
   const [v23, set23] = useState<string>('');const handle23 = (event: React.ChangeEvent<HTMLInputElement>) => {set23(event.target.value);};
   const [v24, set24] = useState<string>('');const handle24 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {set24(event.target.value);};
   const [v25, set25] = useState<string>('');const handle25 = (event: React.ChangeEvent<HTMLInputElement>) => {set25(event.target.value);};
+  const [v26, set26] = useState<boolean>(false);
+  const [v27, set27] = useState<string>('');const handle27 = (event: React.ChangeEvent<HTMLInputElement>) => {set27(event.target.value);};const [v27type, set27type] = useState<number>(1);
+  //if(v26) set27type(1);
 
   const [v31, set31] = useState<string>('');const handle31 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {set31(event.target.value);};
-
-  const [v41a, set41a] = useState<string>('');const handle41a = (event: React.ChangeEvent<HTMLSelectElement>) => {set41a(event.target.value);};
-  const [v41b, set41b] = useState<string>('');const handle41b = (event: React.ChangeEvent<HTMLSelectElement>) => {set41b(event.target.value);};
+  
+  const [v41, set41] = useState<string>('');
+  const [v42a, set42a] = useState<string>('');const handle42a = (event: React.ChangeEvent<HTMLSelectElement>) => {set42a(event.target.value);};const [v42b, set42b] = useState<string>('');const handle42b = (event: React.ChangeEvent<HTMLSelectElement>) => {set42b(event.target.value);};
+  const [v43, set43] = useState<string>('');
+  const [v44, set44] = useState<string>('');const handle44 = (event: React.ChangeEvent<HTMLSelectElement>) => {set44(event.target.value);};
+  const [v45, set45] = useState<string>('');
+  const [v46, set46] = useState<string>('');const handle46 = (event: React.ChangeEvent<HTMLInputElement>) => {set46(event.target.value);};
+  const [v47, set47] = useState<string>('');const handle47 = (event: React.ChangeEvent<HTMLInputElement>) => {set47(event.target.value);};
+  
   console.log(v23);
 
-  const [content, setContent] = useState<string>('Start typing...');
 
 
 const f1={lbl:"LET'S START",
@@ -652,31 +663,44 @@ const f2={lbl:"COMPANY",
   ,{type:1,hdg:"COMPANY EMAIL* (STAYS PRIVATE, FOR INVOICE + EDIT LINK)",body:"",desc:`Make sure this email is accessible by you! We use this to send the invoice and edit link. We can not and do not manually resend it! If you use your company domain (same as company name), we will show a [ Verified ] tag on your job post.`,val:v22,handle:handle22,},
   {type:1,hdg:"INVOICE EMAIL (STAYS PRIVATE)",body:"",desc:`We send a copy of the invoice and edit link to here too. You can write your finance department or accountant expenses email here so they get a copy of the invoice for your bookkeeping.`,val:v23,handle:handle23,},
   {type:2,hdg:"INVOICE ADDRESS*",body:"",desc:"Specify your company address here and we'll put it on your invoice for your bookkeeping. Be sure to [ Save changes ] in bottom right after editing your invoice address. Then it'll be instantly updated on the invoice.",val:v24,handle:handle24,},
-  {type:1,hdg:"INVOICE NOTES / PO NUMBER",body:"",desc:" Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.",val:v25,handle:handle25,}
+  {type:1,hdg:"INVOICE NOTES / PO NUMBER",body:"",desc:" Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.",val:v25,handle:handle25,},
+  {type:8,hdg:"PAY LATER",desc:"Need to get approval for this payment? Or send the invoice to your finance department first? No problem, we'll save your job post and send you (and your finance department below) a payment link. Once it's paid we immediately publish it!",check:v26,handle:set26,},
+  {type:v27type,hdg:"PAY LATER EMAIL*",body:"",desc:"We will send a link to pay for this job to this email address.",val:v27,handle:handle27,},
 
   ],
 }
+console.log(f2.fields[6].type);
+
 const f3={lbl:"FEEDBACK BOX",fields:[{type:2,hdg:"FEEDBACK ABOUT REMOTE OK",body:"",desc:"This isn't part of the job post. If you have any feature requests or general feedback about posting a job Remote OK, leave it here. Please be radically honest, I'm always improving the site and act on your feedback fast. It's most important that you're happy with the site and I want you to keep coming back to post here! This feedback box gets sent straight to my phone wherever I am. -Pieter Levels, Founder of Remote OK",val:v31,handle:handle31,}]}
 
 const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
 const c=b.split(",USD").join("<USD");console.log(c);
-const f4={lbl:"JOB DETAILS",fields:[{type:5,hdg:"ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*",body:`Minimum per year,${c}&&Maximum per year,${c}`,desc:"It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.",}]}
+
+const f4={lbl:"JOB DETAILS",fields:[
+  {type:7,hdg:"COMPANY LOGO (.JPG OR .PNG, SQUARE OR ROUND)",desc:``,handle:set41,},
+  ,{type:5,hdg:"ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*",body:`Minimum per year,${c}&&Maximum per year,${c}`,desc:"It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.",handle:handle42a,handlea:handle42b}
+  ,{type:6,hdg:"JOB DESCRIPTION*",body:"",desc:`Click anywhere outside the editor to save`,val:v43,handle:set43,}
+  ,{type:9,hdg:"BENEFITS",body:"",desc:``,handle:handle44,}
+  ,{type:6,hdg:"HOW TO APPLY?",body:"",desc:`Click anywhere outside the editor to save`,val:v45,handle:set45,}
+  ,{type:1,hdg:"EMAIL TO GET JOB APPLICATIONS VIA APPLICANT AI (OUR OWN ATS)*",body:"Apply email address",desc:`This email is not public (!). You will receive new job applications on this email address via Applicant AI™, a free applicant tracking system (ATS) made by Remote OK. The [ Apply ] button on your job will link to a customizable job apply form on Applicant AI and you'll be able to see people who apply to your job on there.`,val:v46,handle:handle46,}
+  ,{type:1,hdg:"APPLY URL",body:"https://",desc:`If you'd like to use your own apply form or ATS you can enter the URL here for people to apply. Jobs that use our own Applicant AI ATS generally receive more applicants.`,val:v47,handle:handle47,}
+]}
+console.log(v43);
+
+const f5={disp:true,lbl:"PREVIEW",fields:[],pos:v12,comp:v11,locns:tgs16,tags:tgs15,jobdesc:v43,}
+
 
 return (
     <main className="bg-base-100">
-      <main className=" fixed bottom-0 z-10 left-[2.5%] w-full">
-       <JobCard imgflg bdg cls="card glass" position={v12} company_name={v11} location_restriction={tgs16} tags={tgs15} created_at="5/17/2024 23:11:25"/></main>
+      <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
+       <JobCard imgflg bdg imgsrc={v41} cls="card glass" position={v12} company_name={v11} location_restriction={tgs16} tags={tgs15} created_at="5/17/2024 23:11:25"/></main>
        <NavBar endIcon={false} post={true}/>
        <Form title={f1.lbl} items={f1.fields}/>
-       <Form title={f2.lbl} items={f2.fields}/>
        <Form title={f4.lbl} items={f4.fields}/>
+       <Form title={f2.lbl} items={f2.fields}/>
        <Form title={f3.lbl} items={f3.fields}/>
-       <div style={{height:"300px"}}><h1>Jodit Editor Example</h1>
-      <JoditEditorComponent value={content} onChange={setContent} />
-      <div>
-        <h2>Content:</h2>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </div></div>
+       <Form title={f5.lbl} items={f5.fields} disp={true} pos={f5.pos} comp={f5.comp} locns={f5.locns} tags={f5.tags} jobdesc={v43} how2apply={v45}/>
+       <div style={{height:"300px"}}></div>
      
     </main>
     

@@ -18,7 +18,6 @@ const JoditEditorComponent: React.FC<JoditEditorComponentProps> = ({ value, onCh
       }}
       tabIndex={1} // tabIndex of textarea
       onBlur={newContent => onChange(newContent)} // preferred to use only this option to update the content for performance reasons
-      onChange={newContent => {}}
     />
   );
 };

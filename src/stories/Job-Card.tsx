@@ -56,10 +56,10 @@ export const JobCard = ({cls="",bdg = false,imgflg=false,divcls="flex justify-be
   tags="HTML,Css,JS",
   created_at="6/18/2024 1:00:21",
 }: Props) => {
-
+if(company_name=="") company_name="Company";if(position=="") position="Position";if(imgsrc=="") imgsrc="https://tse4.mm.bing.net/th?id=OIP.jsRxsoSHWZurGmwk32OMcQAAAA&pid=Api&P=0&h=220";
  return (
     
-    <li className={`border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start ${cls}`} style={{backgroundColor:`${bgcolor}`}}>
+    <li className={`border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start ${cls}`} style={{backgroundColor:`${bgcolor}`,width:"97%",}}>
     {popup&&<div className="card-body">
     <div className="card-actions justify-end">
       <button className="btn btn-square btn-sm">
