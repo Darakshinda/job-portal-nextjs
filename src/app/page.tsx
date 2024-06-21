@@ -1,10 +1,10 @@
-// Home.tsx
 "use client";
+
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import JobList from './Components/JobList';
 import { Tags } from '../stories/Tags';
-import SalaryRangeSlider from './Components/FilterBox'; // Import the new component
+import SalaryRangeSlider from './Components/FilterBox';
 
 const locationOptions = [
   { label: 'New York' },
@@ -28,7 +28,6 @@ const benefitOptions = [
   { label: 'Retirement Benefits' },
   { label: 'Flexible Working Hours' },
 ];
-
 const Home: React.FC = () => {
   const [selectedLocationTags, setSelectedLocationTags] = useState<string[]>([]);
   const [selectedJobTags, setSelectedJobTags] = useState<string[]>([]);
@@ -37,22 +36,15 @@ const Home: React.FC = () => {
 
   const handleLocationTagSelection = (tags: string[]) => {
     setSelectedLocationTags(tags);
-    console.log('Selected Location Tags:', tags);
   };
 
   const handleJobTagSelection = (tags: string[]) => {
     setSelectedJobTags(tags);
-    console.log('Selected Job Position Tags:', tags);
   };
-
   const handleBenefitTagSelection = (tags: string[]) => {
     setSelectedBenefitTags(tags);
     console.log('Selected Benefit Tags:', tags);
   };
-
-  // const handleSettings = (tags: string[]) => {
-  //   console.log('Settings:', tags);
-  // };
 
   return (
     <main>
@@ -125,9 +117,11 @@ const Home: React.FC = () => {
             salaryRange={salaryRange}
           />
           </div>
-          
         </div>
         <JobList
+          selectedLocationTags={selectedLocationTags}
+          selectedJobTags={selectedJobTags}
+          salaryRange={salaryRange}
         />
       </div>
     </main>

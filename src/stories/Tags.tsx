@@ -12,13 +12,14 @@ interface Props {
   color?: string;
   dynamic?: boolean;
   size?: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   settgs?: Function;
   cls?: string;
   options: Option[];
   req?: boolean;
   placeholder?: string;
+  onSelect: (selectedTags: string[]) => void;
 }
 
 let mySet: Set<string> = new Set();
@@ -36,6 +37,7 @@ export const Tags = ({
   placeholder = 'Type a tag or keyword to search and add it',
   options,
   req = false,
+  onSelect,
 }: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sel, setSel] = useState(0);
@@ -43,6 +45,7 @@ export const Tags = ({
 
   useEffect(() => {
     settgs(tags.join(','));
+    onSelect(tags); // Notify parent component of the selected tags
   }, [tags]);
 
   const filt = (option: Option) => {
