@@ -30,7 +30,7 @@ const RazorpayForm: React.FC<RazorpayFormProps> = ({ jobs }) => {
             // Replace the orderUrl with your server endpoint
             const { data } = await axios.post(orderUrl, { amount: jobs.price, userId: "123456" });
             const options = {
-                key: "rzp_test_0pLj1oTm2LU4c9", // Your Razorpay key ID
+                key: "rzp_test_DL8XNF5TE9MW4P", // Your Razorpay key ID
                 amount: data.data.amount,
                 currency: data.data.currency,
                 name: jobs.name,
