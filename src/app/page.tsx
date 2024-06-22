@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import JobList from './Components/JobList';
-import { Tags } from '../stories/Tags';
 import SalaryRangeSlider from './Components/FilterBox';
+import { Tags2 } from '@/stories/Tags2';
 
 const locationOptions = [
   { label: 'New York' },
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
         <div className="flex gap-4 justify-center items-center">
           <div>
             <h3 className="text-lg font-semibold mb-2"></h3>
-            <Tags
+            <Tags2
               options={locationOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Location"
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-2"></h3>
-            <Tags
+            <Tags2
               options={jobPositionOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Job Position"
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-2"></h3>
-            <Tags
+            <Tags2
               options={benefitOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
               placeholder="Search by Benefits"
@@ -121,7 +121,7 @@ const Home: React.FC = () => {
         <JobList
           selectedLocationTags={selectedLocationTags}
           selectedJobTags={selectedJobTags}
-          salaryRange={salaryRange}
+          // salaryRange={salaryRange}
         />
       </div>
     </main>

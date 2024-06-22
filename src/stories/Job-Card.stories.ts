@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { JobCard } from './Job Card';
+import { JobCard } from './Job-Card';
 
 /**/
 
@@ -58,7 +58,7 @@ export const s5: Story2 = {
 };
 export const s6: Story2 = {
   args: {
-     cls: "card w-96 bg-base-100 shadow-xl image-full",imgflg:true,
+     cls: "card bg-base-100 shadow-xl image-full",imgflg:true,
   },argTypes: {
     imgflg: { control: { disable: true } },
   },
@@ -72,14 +72,14 @@ export const s7: Story2 = {
 };
 export const s8: Story2 = {
   args: {
-     cls: "card w-96 bg-primary text-primary-content",
+     cls: "card bg-primary text-primary-content",
   },argTypes: {
     bgcolor: { control: { disable: true } },
   },
 };
 export const s9: Story2 = {
   args: {
-     cls: "card w-96 bg-neutral text-neutral-content",divcls:"card-body items-center text-center",fgcls:"px-10 pt-10",
+     cls: "card bg-neutral text-neutral-content",divcls:"card-body items-center text-center",fgcls:"px-10 pt-10",
   },
   argTypes: {
     bgcolor: { control: { disable: true } },
@@ -94,7 +94,7 @@ export const s10: Story2 = {
 };
 export const s11: Story2 = {
   args: {
-     cls: "card w-96 glass",imgflg:true,
+     cls: "card glass",imgflg:true,
   },
 };
 export const s12: Story2 = {
@@ -127,4 +127,3 @@ s10.storyName="Card with action on top";
 s11.storyName="Card glass";
 s12.storyName="Image on side";
 s13.storyName="Responsive card (vertical on small screen, horizontal on large screen)";
-

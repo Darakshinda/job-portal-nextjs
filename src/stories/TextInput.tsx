@@ -1,50 +1,63 @@
+"use client"
+
 import React from 'react';
 
+
+
 interface InputProps {
+  keyy?: string;
   cls?: string;
   placeholder?: string;
-  value?: string;
+  req?:boolean;
+  val?: string;
   disabled?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: Function;
 }
 
 interface TextAreaProps {
+  keyy?: string;
   cls?: string;
+  req?:boolean;
   placeholder?: string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  val?: string;
+  onChange?: Function;
 } 
-export const TextInput = ({
+export const TextInput = (
+  {keyy="",
   cls = 'input w-full max-w-xs',
-  placeholder = 'Type here',
-  value,
+  placeholder = '',
+  val,req=false,
   disabled = false,
   onChange,
 }: InputProps) => {
+  
+
   return (
-    <input
+  <input
       type="text"
+      required={req}
       className={cls}
       placeholder={placeholder}
-      value={value}
+      value={val}
       disabled={disabled}
-      onChange={onChange}
+      onChange={(event)=>onChange(keyy,event.target.value) }
     />
   );
 };
 
-export const TextArea = ({
+export const TextArea = ({keyy,
   cls = 'textarea w-full max-w-xs',
-  placeholder = 'Description',
-  value,
+  placeholder = '',
+  val,req=false,
   onChange,
 }: TextAreaProps) => {
   return (
-    <textarea
+    <textarea style={{height:"250px"}}
+      required={req}
       className={cls}
       placeholder={placeholder}
-      value={value}
-      onChange={onChange}
+      value={val}
+      onChange={(event)=>onChange(keyy,event.target.value) }
     />
   );
 };
