@@ -25,7 +25,7 @@ interface TextAreaProps {
 export const TextInput = (
   {keyy="",
   cls = 'input w-full max-w-xs',
-  placeholder = 'Type here',
+  placeholder = '',
   val,req=false,
   disabled = false,
   onChange,
@@ -47,7 +47,7 @@ export const TextInput = (
 
 export const TextArea = ({keyy,
   cls = 'textarea w-full max-w-xs',
-  placeholder = 'Description',
+  placeholder = '',
   val,req=false,
   onChange,
 }: TextAreaProps) => {
