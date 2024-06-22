@@ -5,45 +5,47 @@ import React from 'react';
 
 
 interface InputProps {
+  keyy?: string;
   cls?: string;
   placeholder?: string;
   req?:boolean;
   val?: string;
   disabled?: boolean;
-  event: React.ChangeEvent<HTMLInputElement>;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: Function;
 }
 
 interface TextAreaProps {
+  keyy?: string;
   cls?: string;
   req?:boolean;
   placeholder?: string;
   val?: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: Function;
 } 
 export const TextInput = (
-  {
+  {keyy="",
   cls = 'input w-full max-w-xs',
   placeholder = 'Type here',
   val,req=false,
   disabled = false,
   onChange,
 }: InputProps) => {
+  
 
   return (
-    <input
+  <input
       type="text"
       required={req}
       className={cls}
       placeholder={placeholder}
       value={val}
       disabled={disabled}
-      onChange={onChange}
+      onChange={(event)=>onChange(keyy,event.target.value) }
     />
   );
 };
 
-export const TextArea = ({
+export const TextArea = ({keyy,
   cls = 'textarea w-full max-w-xs',
   placeholder = 'Description',
   val,req=false,
@@ -55,7 +57,7 @@ export const TextArea = ({
       className={cls}
       placeholder={placeholder}
       value={val}
-      onChange={onChange}
+      onChange={(event)=>onChange(keyy,event.target.value) }
     />
   );
 };

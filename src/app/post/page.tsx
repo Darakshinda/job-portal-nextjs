@@ -346,7 +346,7 @@ import { Jodit } from 'jodit-react';
   🤓 Software </div></div></div></div>`;
   let out="";
   
-  const sarr=str.split("\n").map((tag, index) => {out+=`{"label":"`;out+=tag.substring(0, tag.indexOf("<"));out+=`"},`});console.log(out);
+  const sarr=str.split("\n").map((tag, index) => {out+=`{"label":"`;out+=tag.substring(0, tag.indexOf("<"));out+=`"},`});
 
   const str1=`REGION<
 🦁 Africa </option><option value="region_AS">
@@ -613,94 +613,122 @@ COUNTRIES<optgroup label="Countries">
 `;
 let out1="";
 
-const sarr1=str1.split("\n").map((tag, index) => {out1+=`{"label":"`;out1+=tag.substring(0, tag.indexOf("<"));out1+=`"},`});console.log(out1);
+const sarr1=str1.split("\n").map((tag, index) => {out1+=`{"label":"`;out1+=tag.substring(0, tag.indexOf("<"));out1+=`"},`});
+
+const str2=`💰 401(k) </div>
+🌎 Distributed team </div>
+⏰ Async </div>
+🤓 Vision insurance </div>
+🦷 Dental insurance </div>
+🚑 Medical insurance </div>
+🏖 Unlimited vacation </div>
+🏖 Paid time off </div>
+📆 4 day workweek </div>
+💰 401k matching </div>
+🏔 Company retreats </div>
+🏬 Coworking budget </div>
+📚 Learning budget </div>
+💪 Free gym membership </div>
+🧘 Mental wellness budget </div>
+🖥 Home office budget </div>
+🥧 Pay in crypto </div>
+🥸 Pseudonymous </div>
+💰 Profit sharing </div>
+💰 Equity compensation </div>
+⬜️ No whiteboard interview </div>
+👀 No monitoring system </div>
+🚫 No politics at work </div>
+🎅 We hire old (and young) </div>`
+let out2="";
+
+const sarr2=str2.split("\n").map((tag, index) => {out2+=`{"label":"`;out2+=tag.substring(0, tag.indexOf("<"));out2+=`"},`});
 
 export default function Home() {
-  
-  
-  const [v11, set11] = useState<string>("");const handle11 = (event: React.ChangeEvent<HTMLInputElement>) => {set11(event.target.value);};
-  const [v12, set12] = useState<string>("");const handle12 = (event: React.ChangeEvent<HTMLInputElement>) => {set12(event.target.value);};
-  const [v13, set13] = useState<string>('');const handle13 = (event: React.ChangeEvent<HTMLSelectElement>) => {set13(event.target.value);};
-  const [v14, set14] = useState<string>('');const handle14 = (event: React.ChangeEvent<HTMLSelectElement>) => {set14(event.target.value);};
-  const [tgs15, settgs15] = React.useState('');
-  const [tgs16, settgs16] = React.useState('');
 
-  const [v21, set21] = useState<string>('');const handle21 = (event: React.ChangeEvent<HTMLInputElement>) => {set21(event.target.value);};
-  const [v22, set22] = useState<string>('');const handle22 = (event: React.ChangeEvent<HTMLInputElement>) => {set22(event.target.value);};
-  const [v23, set23] = useState<string>('');const handle23 = (event: React.ChangeEvent<HTMLInputElement>) => {set23(event.target.value);};
-  const [v24, set24] = useState<string>('');const handle24 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {set24(event.target.value);};
-  const [v25, set25] = useState<string>('');const handle25 = (event: React.ChangeEvent<HTMLInputElement>) => {set25(event.target.value);};
-  const [v26, set26] = useState<boolean>(false);
-  const [v27, set27] = useState<string>('');const handle27 = (event: React.ChangeEvent<HTMLInputElement>) => {set27(event.target.value);};const [v27type, set27type] = useState<number>(1);
+ 
+  const [user, setPerson] = useState({
+    company: "",position: "",emptype: "",primtg: "",tags: "",locns:'',
+    logo:'',minsal:"",maxsal:'',desc:'',benefits:'',how2apply:'',email4jobappl:'',applUrl:'',
+    twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',
+  });
+
+  const handleChange = (key:string, value:string) => {
+    setPerson((prevState) => {
+      if (prevState[key] === value) {
+        return prevState; // Prevent unnecessary state updates
+      }
+      return {
+        ...prevState,
+        [key]: value,
+      };
+    });
+  };
+  
+  
+  const [v27type, set27type] = useState<number>(1);
   //if(v26) set27type(1);
 
-  const [v31, set31] = useState<string>('');const handle31 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {set31(event.target.value);};
   
-  const [v41, set41] = useState<string>('');
-  const [v42a, set42a] = useState<string>('');const handle42a = (event: React.ChangeEvent<HTMLSelectElement>) => {set42a(event.target.value);};const [v42b, set42b] = useState<string>('');const handle42b = (event: React.ChangeEvent<HTMLSelectElement>) => {set42b(event.target.value);};
-  const [v43, set43] = useState<string>('');
-  const [v44, set44] = useState<string>('');const handle44 = (event: React.ChangeEvent<HTMLSelectElement>) => {set44(event.target.value);};
-  const [v45, set45] = useState<string>('');
-  const [v46, set46] = useState<string>('');const handle46 = (event: React.ChangeEvent<HTMLInputElement>) => {set46(event.target.value);};
-  const [v47, set47] = useState<string>('');const handle47 = (event: React.ChangeEvent<HTMLInputElement>) => {set47(event.target.value);};
+  const [v44, set44] = useState<string>('');
   
-  console.log(v23);
 
 
 
-const f1={lbl:"LET'S START",
-  fields:[{type:1,hdg:"COMPANY NAME*",body:"Sample",desc:"Your company's brand/trade name: without Inc., Ltd., B.V., Pte., etc.",val:v11,handle:handle11,}
-  ,{type:1,hdg:"POSITION*",body:"Manager",desc:` Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". We know your job is important but please DO NOT WRITE IN FULL CAPS. If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.`,val:v12,handle:handle12,},
-  {type:3,hdg:"EMPLOYMENT TYPE*",body:"Full-time<Part-time<Contractor<Temporary<Internship<Per diem<Volunteer<Onsite",desc:"",val:v13,handle:handle13,},
-  {type:3,hdg:"PRIMARY TAG",body:"Software Development<Customer Support<Sales<Marketing<Design<Front End<Back End<Legal<Testing<Quality Assurance<Non-Tech<Other",desc:"This primary tag shows first and increases visibility in the main sections. Your job is shown on every page that is tagged with though. E.g. if you tag it as PHP, it shows for Remote PHP Jobs etc.",val:v14,handle:handle14,},
-  {type:4,hdg:"TAGS, KEYWORDS OR STACK*",body:`[${out.slice(0, -1)}]`,desc:`Short tags are preferred. Use tags like industry and tech stack. The first 3 or 4 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also sometimes generate tags automatically after you post/edit to supplement.`,settgs:settgs15},
-  {type:4,hdg:"JOB IS RESTRICTED TO LOCATIONS?",body:`[${out1.slice(0, -1)}]`,desc:`If you'd only like to hire people from a specific location or timezone this remote job is restricted to (e.g. Europe, United States or Japan). If not restricted, please leave it as "Worldwide". The less restricted this is, the more applicants you will get. Keeping it "Worldwide" is highly recommended as you'll have access to a worldwide pool of talent. To promote fairness in remote work positions, worldwide jobs are ranked higher.`,settgs:settgs16},
+const f1={lbl:"LET'S START",fields:[
+  {key:"company",type:1,hdg:"COMPANY NAME*",body:"Sample",desc:"Your company's brand/trade name: without Inc., Ltd., B.V., Pte., etc.",val:user.company,},
+  {key:"position",type:1,hdg:"POSITION*",body:"Manager",desc:` Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". We know your job is important but please DO NOT WRITE IN FULL CAPS. If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.`,val:user.position,},
+  {key:"emptype",type:3,hdg:"EMPLOYMENT TYPE*",body:"Full-time<Part-time<Contractor<Temporary<Internship<Per diem<Volunteer<Onsite",desc:"",val:user.emptype,},
+  {key:"primtg",type:3,hdg:"PRIMARY TAG",body:"Software Development<Customer Support<Sales<Marketing<Design<Front End<Back End<Legal<Testing<Quality Assurance<Non-Tech<Other",desc:"This primary tag shows first and increases visibility in the main sections. Your job is shown on every page that is tagged with though. E.g. if you tag it as PHP, it shows for Remote PHP Jobs etc.",val:user.primtg,},
+  {type:4,hdg:"TAGS, KEYWORDS OR STACK*",body:`[${out.slice(0, -1)}]`,desc:`Short tags are preferred. Use tags like industry and tech stack. The first 3 or 4 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also sometimes generate tags automatically after you post/edit to supplement.`,val:user.tags,key:"tags"},
+  {type:4,hdg:"JOB IS RESTRICTED TO LOCATIONS?",body:`[${out1.slice(0, -1)}]`,desc:`If you'd only like to hire people from a specific location or timezone this remote job is restricted to (e.g. Europe, United States or Japan). If not restricted, please leave it as "Worldwide". The less restricted this is, the more applicants you will get. Keeping it "Worldwide" is highly recommended as you'll have access to a worldwide pool of talent. To promote fairness in remote work positions, worldwide jobs are ranked higher.`,val:user.locns,key:"locns"},
 
 ],
 }
+
 const f2={lbl:"COMPANY",
-  fields:[{type:1,hdg:"COMPANY TWITTER",body:"Sample",desc:"Twitter username without @. Not required, but used to tag your company when we tweet out your job post",val:v21,handle:handle21,}
-  ,{type:1,hdg:"COMPANY EMAIL* (STAYS PRIVATE, FOR INVOICE + EDIT LINK)",body:"",desc:`Make sure this email is accessible by you! We use this to send the invoice and edit link. We can not and do not manually resend it! If you use your company domain (same as company name), we will show a [ Verified ] tag on your job post.`,val:v22,handle:handle22,},
-  {type:1,hdg:"INVOICE EMAIL (STAYS PRIVATE)",body:"",desc:`We send a copy of the invoice and edit link to here too. You can write your finance department or accountant expenses email here so they get a copy of the invoice for your bookkeeping.`,val:v23,handle:handle23,},
-  {type:2,hdg:"INVOICE ADDRESS*",body:"",desc:"Specify your company address here and we'll put it on your invoice for your bookkeeping. Be sure to [ Save changes ] in bottom right after editing your invoice address. Then it'll be instantly updated on the invoice.",val:v24,handle:handle24,},
-  {type:1,hdg:"INVOICE NOTES / PO NUMBER",body:"",desc:" Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.",val:v25,handle:handle25,},
-  {type:8,hdg:"PAY LATER",desc:"Need to get approval for this payment? Or send the invoice to your finance department first? No problem, we'll save your job post and send you (and your finance department below) a payment link. Once it's paid we immediately publish it!",check:v26,handle:set26,},
-  {type:v27type,hdg:"PAY LATER EMAIL*",body:"",desc:"We will send a link to pay for this job to this email address.",val:v27,handle:handle27,},
+  fields:[{type:1,hdg:"COMPANY TWITTER",body:"Sample",desc:"Twitter username without @. Not required, but used to tag your company when we tweet out your job post",val:user.twtr,key:"twtr",}
+  ,{type:1,hdg:"COMPANY EMAIL* (STAYS PRIVATE, FOR INVOICE + EDIT LINK)",body:"",desc:`Make sure this email is accessible by you! We use this to send the invoice and edit link. We can not and do not manually resend it! If you use your company domain (same as company name), we will show a [ Verified ] tag on your job post.`,val:user.compMail,key:"compMail",},
+  {type:1,hdg:"INVOICE EMAIL (STAYS PRIVATE)",body:"",desc:`We send a copy of the invoice and edit link to here too. You can write your finance department or accountant expenses email here so they get a copy of the invoice for your bookkeeping.`,val:user.invMail,key:"invMail",},
+  {type:2,hdg:"INVOICE ADDRESS*",body:"",desc:"Specify your company address here and we'll put it on your invoice for your bookkeeping. Be sure to [ Save changes ] in bottom right after editing your invoice address. Then it'll be instantly updated on the invoice.",val:user.invAdrs,key:"invAdrs",},
+  {type:1,hdg:"INVOICE NOTES / PO NUMBER",body:"",desc:" Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.",val:user.invNote,key:"invNote",},
+  {type:88,hdg:"PAY LATER",desc:"Need to get approval for this payment? Or send the invoice to your finance department first? No problem, we'll save your job post and send you (and your finance department below) a payment link. Once it's paid we immediately publish it!",check:user.payLtr,key:"payLtr",},
+  {type:v27type,hdg:"PAY LATER EMAIL*",body:"",desc:"We will send a link to pay for this job to this email address.",val:user.pltrEml,key:"pltrEml",},
 
   ],
 }
 console.log(f2.fields[6].type);
 
-const f3={lbl:"FEEDBACK BOX",fields:[{type:2,hdg:"FEEDBACK ABOUT REMOTE OK",body:"",desc:"This isn't part of the job post. If you have any feature requests or general feedback about posting a job Remote OK, leave it here. Please be radically honest, I'm always improving the site and act on your feedback fast. It's most important that you're happy with the site and I want you to keep coming back to post here! This feedback box gets sent straight to my phone wherever I am. -Pieter Levels, Founder of Remote OK",val:v31,handle:handle31,}]}
+const f3={lbl:"FEEDBACK BOX",fields:[{type:2,hdg:"FEEDBACK ABOUT CODEUNITY",body:"",desc:"This isn't part of the job post. If you have any feature requests or general feedback about posting a job Remote OK, leave it here. Please be radically honest, I'm always improving the site and act on your feedback fast. It's most important that you're happy with the site and I want you to keep coming back to post here! This feedback box gets sent straight to my phone wherever I am. -Pieter Levels, Founder of Remote OK",val:user.fdbck,key:"fdbck",}]}
 
 const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
-const c=b.split(",USD").join("<USD");console.log(c);
+const c=b.split(",USD").join("<USD");
 
 const f4={lbl:"JOB DETAILS",fields:[
-  {type:7,hdg:"COMPANY LOGO (.JPG OR .PNG, SQUARE OR ROUND)",desc:``,handle:set41,},
-  ,{type:5,hdg:"ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*",body:`Minimum per year,${c}&&Maximum per year,${c}`,desc:"It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.",handle:handle42a,handlea:handle42b}
-  ,{type:6,hdg:"JOB DESCRIPTION*",body:"",desc:`Click anywhere outside the editor to save`,val:v43,handle:set43,}
-  ,{type:9,hdg:"BENEFITS",body:"",desc:``,handle:handle44,}
-  ,{type:6,hdg:"HOW TO APPLY?",body:"",desc:`Click anywhere outside the editor to save`,val:v45,handle:set45,}
-  ,{type:1,hdg:"EMAIL TO GET JOB APPLICATIONS VIA APPLICANT AI (OUR OWN ATS)*",body:"Apply email address",desc:`This email is not public (!). You will receive new job applications on this email address via Applicant AI™, a free applicant tracking system (ATS) made by Remote OK. The [ Apply ] button on your job will link to a customizable job apply form on Applicant AI and you'll be able to see people who apply to your job on there.`,val:v46,handle:handle46,}
-  ,{type:1,hdg:"APPLY URL",body:"https://",desc:`If you'd like to use your own apply form or ATS you can enter the URL here for people to apply. Jobs that use our own Applicant AI ATS generally receive more applicants.`,val:v47,handle:handle47,}
+  {type:7,hdg:"COMPANY LOGO (.JPG OR .PNG, SQUARE OR ROUND)",desc:``,val:user.logo,key: "logo",},
+  ,{type:5,hdg:"ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*",body:`Minimum per year,${c}&&Maximum per year,${c}`,desc:"It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.",key:"minsal",keya:"maxsal",}
+  ,{type:6,hdg:"JOB DESCRIPTION*",body:"",desc:`Click anywhere outside the editor to save`,val:user.desc,key: "desc",}
+  ,{type:9,hdg:"BENEFITS",body:`[${out2.slice(0,-1)}]`,desc:``,key:"benefits",}
+  ,{type:6,hdg:"HOW TO APPLY?",body:"",desc:`Click anywhere outside the editor to save`,val:user.how2apply,key: "how2apply",}
+  ,{type:1,hdg:"EMAIL TO GET JOB APPLICATIONS VIA APPLICANT AI (OUR OWN ATS)*",body:"Apply email address",desc:`This email is not public (!). You will receive new job applications on this email address via Applicant AI™, a free applicant tracking system (ATS) made by Remote OK. The [ Apply ] button on your job will link to a customizable job apply form on Applicant AI and you'll be able to see people who apply to your job on there.`,val:user.email4jobappl,key:"email4jobappl",}
+  ,{type:1,hdg:"APPLY URL",body:"https://",desc:`If you'd like to use your own apply form or ATS you can enter the URL here for people to apply. Jobs that use our own Applicant AI ATS generally receive more applicants.`,val:user.applUrl,key:"applUrl",}
 ]}
-console.log(v43);
+console.log(user);
 
-const f5={disp:true,lbl:"PREVIEW",fields:[],pos:v12,comp:v11,locns:tgs16,tags:tgs15,jobdesc:v43,}
+const f5={disp:true,lbl:"PREVIEW",fields:[],pos:user.position,comp:user.company,locns:user.locns,tags:user.tags,jobdesc:user.desc,}
 
 
 return (
     <main className="bg-base-100">
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
-       <JobCard imgflg bdg imgsrc={v41} cls="card glass" position={v12} company_name={v11} location_restriction={tgs16} tags={tgs15} created_at="5/17/2024 23:11:25"/></main>
+       <JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></main>
+
        <NavBar endIcon={false} post={true}/>
-       <Form title={f1.lbl} items={f1.fields}/>
-       <Form title={f4.lbl} items={f4.fields}/>
-       <Form title={f2.lbl} items={f2.fields}/>
-       <Form title={f3.lbl} items={f3.fields}/>
-       <Form title={f5.lbl} items={f5.fields} disp={true} pos={f5.pos} comp={f5.comp} locns={f5.locns} tags={f5.tags} jobdesc={v43} how2apply={v45}/>
-       <div style={{height:"300px"}}></div>
+       <Form title={f1.lbl} items={f1.fields} handle={handleChange}/>
+       <Form title={f4.lbl} items={f4.fields} handle={handleChange}/>
+       <Form title={f2.lbl} items={f2.fields} handle={handleChange}/>
+       <Form title={f3.lbl} items={f3.fields} handle={handleChange}/>
+       <Form title={f5.lbl} items={f5.fields} handle={handleChange} imgsrc={user.logo} disp={true} pos={f5.pos} comp={f5.comp} locns={f5.locns} tags={f5.tags} jobdesc={user.desc} how2apply={user.how2apply}/>
+       <div style={{height:"200px"}}></div>
      
     </main>
     

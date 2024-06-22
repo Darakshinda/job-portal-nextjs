@@ -3,7 +3,7 @@ import React from 'react';
 
 interface Props {
  
-  cls?: string;onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;req?:boolean;body?:string;id?:string;type?:number;
+  keyy?:string;cls?: string;onChange?: Function;req?:boolean;body?:string;id?:string;type?:number;
 }
 interface Propd {
  
@@ -13,12 +13,12 @@ interface Propd {
 /**
  * Primary UI component for user interaction
  */
-export const Select = ({
+export const Select = ({keyy='',
   cls=`select select-bordered w-full max-w-xs`,req=false,onChange,body="",id,type=3,
 }: Props) => {
 if(type==5) return(
   
-  <select className={`${cls}`} required={req} onChange={onChange} id={id} style={{display:"inline",width:"37%"}}>
+  <select className={`${cls}`} required={req} onChange={(event)=>onChange(keyy,event.target.value) } id={id} style={{display:"inline",width:"37%"}}>
   {body.split("<").map((option) => (
         <option>
           {option}
@@ -29,7 +29,7 @@ if(type==5) return(
   
   return(
   
-  <select className={`${cls}`} required={req} onChange={onChange} id={id}>
+  <select className={`${cls}`} required={req} onChange={(event)=>onChange(keyy,event.target.value)} id={id}>
   {body.split("<").map((option) => (
         <option>
           {option}

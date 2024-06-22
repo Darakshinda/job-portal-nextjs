@@ -12,7 +12,7 @@ interface Props {
  
     closeable?:boolean;linktg?:boolean;color?:string;dynamic?:boolean;size?:string;value: string;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;settgs?:Function;
-    cls?: string;
+    cls?: string;keyy?:string;
     options: Option[];
     req?: boolean;
   }
@@ -72,8 +72,7 @@ interface Props {
 */
 let mySet: Set<string> = new Set();
   export const Tags = ({closeable=false,linktg=false,color="white",dynamic=false,size="sm",cls = 'select',settgs=()=>{},
-    value,
-    onChange,
+    value,keyy,
     options,
     req = false,}: Props) => 
       {
@@ -85,7 +84,7 @@ let mySet: Set<string> = new Set();
           console.log(item);
       });
       const filt=(option:Option,)=>{
-        console.log(mySet.has(option.label));
+        
         return (option.label.toLowerCase().includes(searchTerm.toLowerCase())||option.label=="REGION"||option.label=="COUNTRIES")&&!mySet.has(option.label);}
       
         const filteredOptions = options.filter(option =>
@@ -96,10 +95,10 @@ let mySet: Set<string> = new Set();
   const [typing, setTyping] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("$$");
 
-  settgs(tags.join(","));
+  settgs(keyy,tags.join(","));
 
   const handleOutsideClick = () => {
-    console.log('Clicked outside the div');setsel(0);setSearchTerm("");
+    setsel(0);setSearchTerm("");
   };
    
 
@@ -110,7 +109,7 @@ let mySet: Set<string> = new Set();
   };
 
   const addTag = () => {
-    console.log(`hello ${searchTerm}`)
+    
     const nextTags = searchTerm ? [...tags, searchTerm] : tags;
     setTags(nextTags);
     setTyping(false);setInputValue("$$");setSearchTerm("");

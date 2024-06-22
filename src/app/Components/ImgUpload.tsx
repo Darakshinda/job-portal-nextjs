@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 
 interface ImgProps {
-    onChange: (value: string) => void;
+    keyy:string;
+    onChange: Function;
   }
 
-const UploadButton: React.FC<ImgProps> = ({onChange}) => {
+const UploadButton: React.FC<ImgProps> = ({onChange,keyy}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
@@ -16,7 +17,7 @@ const UploadButton: React.FC<ImgProps> = ({onChange}) => {
     const file = event.target.files?.[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setBackgroundImage(imageUrl);onChange(imageUrl);
+      setBackgroundImage(imageUrl);onChange(keyy,imageUrl);
       // Handle file upload logic here if needed
     }
   };

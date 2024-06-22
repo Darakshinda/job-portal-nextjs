@@ -43,7 +43,7 @@ export const NavBar = ({
       )}
       <div className="flex-1"> 
         <a className={`text-black p-6 text-3xl `} >Code Unity</a>
-        {post&&<main className="flex-1"><a className={`${buttonClass} text-black ml-[25%] font-serif p-21 text-[251%] `}>{"Hire remotely"}</a>
+        {post&&<main className="flex-1"><a className={`${buttonClass} text-black ml-[25%] font-serif p-21 text-[250%] `}>{"Hire remotely"}</a>
         <Link href="/"><button className='btn btn-error ml-[27%] text-white font-bold'>Back{" <--"}</button></Link></main>}
       </div>
       {menu && (

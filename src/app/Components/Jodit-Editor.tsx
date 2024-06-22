@@ -2,11 +2,12 @@ import React, { useRef, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
 
 interface JoditEditorComponentProps {
+  keyy:string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: Function;
 }
 
-const JoditEditorComponent: React.FC<JoditEditorComponentProps> = ({ value, onChange }) => {
+const JoditEditorComponent: React.FC<JoditEditorComponentProps> = ({ keyy,value, onChange }) => {
   const editorRef = useRef<JoditEditor | null>(null);
 
   return (
@@ -17,7 +18,7 @@ const JoditEditorComponent: React.FC<JoditEditorComponentProps> = ({ value, onCh
         readonly: false, // all options from https://xdsoft.net/jodit/doc/
       }}
       tabIndex={1} // tabIndex of textarea
-      onBlur={newContent => onChange(newContent)} // preferred to use only this option to update the content for performance reasons
+      onBlur={newContent => onChange(keyy,newContent)} // preferred to use only this option to update the content for performance reasons
     />
   );
 };
