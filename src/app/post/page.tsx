@@ -84,7 +84,7 @@ return (
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>Short tags are preferred. Use tags like industry and tech stack. The first 3 or 4 tags are shown on the site, the other tags aren't but the job will be shown on each tag specific page (like /remote-react-jobs). We also sometimes generate tags automatically after you post/edit to supplement.</span>
 
         <span className="head">JOB IS RESTRICTED TO LOCATIONS?</span>
-        <Tags keyy='locns' cls="input_company" settgs={handleChange} dynamic={true} options={locnOpns}/>
+        <Tags keyy='locns' cls="input_company" settgs={handleChange} dynamic={true} options={locnOpns} phdr='Type a location this job is restricted to'/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>If you'd only like to hire people from a specific location or timezone this remote job is restricted to (e.g. Europe, United States or Japan). If not restricted, please leave it as "Worldwide". The less restricted this is, the more applicants you will get. Keeping it "Worldwide" is highly recommended as you'll have access to a worldwide pool of talent. To promote fairness in remote work positions, worldwide jobs are ranked higher.</span>
 
        </div>
@@ -113,10 +113,12 @@ return (
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.</span>
 
         <span className="head">PAY LATER</span>
+        <div style={{marginLeft:"1.4%"}}><Checkbox keyy="payLtr" label="I'd like to pay later" checked={user.payLtr} onChange={handleChange}/></div>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>{`Need to get approval for this payment? Or send the invoice to your finance department first? No problem, we'll save your job post and send you (and your finance department below) a payment link. Once it's paid we immediately publish it!`}</span>
 
-        <span className="head">PAY LATER EMAIL*</span>
-        <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>We will send a link to pay for this job to this email address.</span>
+      { user.payLtr&&<div><span className="head">PAY LATER EMAIL*</span>
+        <TextInput keyy='pltrEml' val={user.pltrEml} placeholder={`Pay later email address`} onChange={handleChange} req={true} cls="input_company"/>
+        <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>We will send a link to pay for this job to this email address.</span></div>}
        
        </div>
 
