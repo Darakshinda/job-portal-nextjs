@@ -25,7 +25,7 @@ import locnOpns from "../post/data/location.json";import tagOpns from "../post/d
 
 export default function Home() {
   const [user, setuser] = useState({
-    company: "",position: "",emptype: "",primtg: "",tags: "",locns:'',
+    company: "",position: "",emptype: "Full-time",primtg: "Software Development",tags: "",locns:'',
     logo:'',minsal:"",maxsal:'',desc:'',benefits:'',how2apply:'',email4jobappl:'',applUrl:'',
     twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',
   });
@@ -43,20 +43,22 @@ export default function Home() {
   };
   
   
-  const [v27type, set27type] = useState<number>(1);console.log(user);
+  const [v27type, set27type] = useState<number>(1);
 
 const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
 const c=b.split(",USD").join("<USD");
 
 let comp=user.company,pos=user.position,jobdesc=user.desc,how2apply=user.how2apply;
 if(comp=="") comp="Company";if(pos=="") pos="Position";if(jobdesc=="") jobdesc=`The description of the job position will appear here. Write this in the "Job Description" box above.`;
-
+const disp=()=>console.log(user);
 
 return (
     <main className="bg-base-100">
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
        <JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></main>
        <NavBar endIcon={false} post={true}/>
+       <div className=" fixed bottom-0 z-10 w-full" style={{width:"30%",height:"22%",marginLeft:"60%",backgroundColor:"white",border:"shadow",borderWidth:"2px",display:"flex",justifyItems:"center",alignItems:"center"}}>
+        <button className='btn btn-error ml-[5%] text-white font-bold'  style={{width:"90%",height:"50%",}} onClick={disp}>Post Job</button></div>
 
        <div className="group">
         <div className="group-heading">LET'S START</div>
@@ -107,7 +109,7 @@ return (
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>{`Specify your company address here and we'll put it on your invoice for your bookkeeping. Be sure to [ Save changes ] in bottom right after editing your invoice address. Then it'll be instantly updated on the invoice.`}</span>
         
         <span className="head">INVOICE NOTES / PO NUMBER</span>
-        <TextInput keyy='company' val={user.company} placeholder={`e.g. PO number 1234`} onChange={handleChange} req={true} cls="input_company"/>
+        <TextInput keyy='invNote' val={user.invNote} placeholder={`e.g. PO number 1234`} onChange={handleChange} req={true} cls="input_company"/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>Not required. Add notes here that you'd like to see on the invoice/receipt such as a Purchase Order number or any other internal notes you need for reference. You can add or edit this later.</span>
 
         <span className="head">PAY LATER</span>
@@ -131,9 +133,9 @@ return (
         
         <span className="head">{`ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*`}</span>
         <div style={{marginLeft:"18%"}}>
-          <div style={{display:"inline"}}><Select keyy="minval" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} type="small" /></div> 
+          <div style={{display:"inline"}}><Select keyy="minsal" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} type="small" /></div> 
           <a style={{display:"inline",fontSize:"30px",marginLeft:"1%"}}>{`-`}</a>
-          <div style={{display:"inline"}}><Select keyy="maxval" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} type="small"/></div> 
+          <div style={{display:"inline"}}><Select keyy="maxsal" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} type="small"/></div> 
         </div>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.</span>
 

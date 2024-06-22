@@ -80,9 +80,7 @@ let mySet: Set<string> = new Set();
         const [searchTerm, setSearchTerm] = useState('');
         const [sel, setsel] = useState(0);
        
-        mySet.forEach((item) => {
-          console.log(item);
-      });
+        
       const filt=(option:Option,)=>{
         
         return (option.label.toLowerCase().includes(searchTerm.toLowerCase())||option.label=="REGION"||option.label=="COUNTRIES")&&!mySet.has(option.label);}
@@ -119,7 +117,7 @@ let mySet: Set<string> = new Set();
   const handleButtonClick = () => {
     setTyping(true);
   };
-  console.log(`@@${inputValue} ${searchTerm}`);
+  
   if(inputValue=="done") addTag();
   const renderInput = () => {
    
