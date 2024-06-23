@@ -13,6 +13,7 @@ const locationOptions = [
   { label: 'San Francisco' },
   { label: 'Seattle' },
   { label: 'Boston' },
+  {label: 'Africa'},
 ];
 
 const jobPositionOptions = [

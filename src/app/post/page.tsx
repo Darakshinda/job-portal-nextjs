@@ -31,17 +31,18 @@ export default function Home() {
       company_twitter: '', company_email: '', invoice_email: '', invoice_address: '', invoice_notes: '', pay_later: false, pltrEml: '', feedback: '',
     });
 
-  const handleChange = (key:string, value:string) => {
-    setuser((prevState) => {
-      if (prevState[key] === value) {
-        return prevState; // Prevent unnecessary state updates
-      }
-      return {
-        ...prevState,
-        [key]: value,
+    const handleChange = (key, value) => {
+        setuser((prevState) => {
+          if (prevState[key] === value) {
+            return prevState; // Prevent unnecessary state updates
+          }
+          return {
+            ...prevState,
+            [key]: key.includes('annual_salary') ? Number(value.replace(/[^0-9]/g, '')) : value,
+          };
+        });
       };
-    });
-  };
+      
   
   
   const [v27type, set27type] = useState<number>(1);
@@ -145,13 +146,35 @@ return (
         <div style={{marginLeft:"1.4%",marginRight:"2%"}}><JoditEditorComponent keyy="job_description" value={user.job_description} onChange={handleChange}/></div>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>Click anywhere outside the editor to save</span>
         
-        <span className="head">{`ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*`}</span>
-        <div style={{marginLeft:"18%"}}>
-          <div style={{display:"inline"}}><Select keyy="annual_salary_min" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} type="small" /></div> 
-          <a style={{display:"inline",fontSize:"30px",marginLeft:"1%"}}>{`-`}</a>
-          <div style={{display:"inline"}}><Select keyy="annual_salary_max" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} type="small"/></div> 
-        </div>
-        <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.</span>
+        <div>
+      <span className="head">{`ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*`}</span>
+      <div style={{marginLeft:"18%"}}>
+        <div style={{display:"inline"}}>
+          <Select 
+            keyy="annual_salary_min" 
+            onChange={(key, value) => handleChange(key, value)} 
+            req={true} 
+            cls="input_company" 
+            body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} 
+            type="small" 
+          />
+        </div> 
+        <a style={{display:"inline",fontSize:"30px",marginLeft:"1%"}}>{`-`}</a>
+        <div style={{display:"inline"}}>
+          <Select 
+            keyy="annual_salary_max" 
+            onChange={(key, value) => handleChange(key, value)} 
+            req={true} 
+            cls="input_company" 
+            body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} 
+            type="small"
+          />
+        </div> 
+      </div>
+      <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>
+        It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.
+      </span>
+    </div>
 
         <span className="head">BENEFITS*</span>
         <div style={{marginLeft:"1.4%"}}><SelectedOptions options={benefitOpns} keyy="benefits" onChange={handleChange} /></div>
