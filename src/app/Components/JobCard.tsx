@@ -2,7 +2,7 @@ import React from "react";
 import { getTimeDifference } from "../utils/timeutils";
 
 interface JobCardProps {
-  id: number;
+
   position: string;
   company_name: string;
   location_restriction: string;
@@ -11,7 +11,7 @@ interface JobCardProps {
 }
 
 const JobCard: React.FC<JobCardProps> = ({
-  id,
+
   position,
   company_name,
   location_restriction,
@@ -19,7 +19,7 @@ const JobCard: React.FC<JobCardProps> = ({
   created_at,
 }) => {
   return (
-    <li className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start">
+    <li className="bg-yellow-100 border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start">
       <div className="flex justify-between w-full mb-2">
         <h3 className="text-lg font-bold">{position}</h3>
       </div>
@@ -45,6 +45,7 @@ const JobCard: React.FC<JobCardProps> = ({
           </button>
         </div>
       </div>
+      
       <p className="border border-gray-300 rounded-md px-2 py-2 text-black-500 text-center">
         {location_restriction}
       </p>

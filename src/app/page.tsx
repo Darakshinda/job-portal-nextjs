@@ -2,7 +2,10 @@ import React from "react";
 import Navbar from "./Navbar";
 import JobList from "./Components/JobList";
 
+
+
 export default function Home() {
+  
   return (
     <main>
       <Navbar />
