@@ -14,6 +14,7 @@ import Checkbox from '../Components/Check';
 import SelectedOptions from '../Components/Options';
 import "../Components/Form.css";
 import locnOpns from "../post/data/location.json";import tagOpns from "../post/data/tags.json";import benefitOpns from "../post/data/benefits.json"
+import ColorPickerButton from '../Components/ColorPicker';
 
 
 
@@ -27,7 +28,7 @@ export default function Home() {
   const [user, setuser] = useState({
     company: "",position: "",emptype: "Full-time",primtg: "Software Development",tags: "",locns:'',
     logo:'',minsal:"",maxsal:'',desc:'',benefits:'',how2apply:'',email4jobappl:'',applUrl:'',
-    twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',
+    twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',bgcolor:'',
   });
 
   const handleChange = (key:string, value:string) => {
@@ -42,8 +43,7 @@ export default function Home() {
     });
   };
   
-  
-  const [v27type, set27type] = useState<number>(1);
+
 
 const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
 const c=b.split(",USD").join("<USD");
@@ -54,8 +54,11 @@ const disp=()=>console.log(user);
 
 return (
     <main className="bg-base-100">
+      
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
-       <JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></main>
+       {user.bgcolor==""&&<JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/>}
+       {user.bgcolor!=""&&<JobCard imgflg bdg imgsrc={user.logo} cls="card glass" bgcolor={user.bgcolor} position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/>}
+       </main>
        <NavBar endIcon={false} post={true}/>
        <div className=" fixed bottom-0 z-10 w-full" style={{width:"30%",height:"22%",marginLeft:"60%",backgroundColor:"white",border:"shadow",borderWidth:"2px",display:"flex",justifyItems:"center",alignItems:"center"}}>
         <button className='btn btn-error ml-[5%] text-white font-bold'  style={{width:"90%",height:"50%",}} onClick={disp}>Post Job</button></div>
@@ -126,8 +129,9 @@ return (
         <div className="group-heading">JOB DETAILS</div>
 
         <span className="head">{`COMPANY LOGO (.JPG OR .PNG, SQUARE OR ROUND)`}</span>
-        <div style={{marginLeft:"1.4%"}}><UploadButton keyy="logo" onChange={handleChange}/></div>
-        <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>Twitter username without @. Not required, but used to tag your company when we tweet out your job post.</span>
+        <div style={{marginLeft:"1.4%"}}><UploadButton keyy="logo" onChange={handleChange}/>
+        <div style={{display:"flex",alignItems:"center"}}>Highlight with your company's 🌈 brand color:<ColorPickerButton change={handleChange} keyy='bgcolor' /></div></div>
+        <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
         
         <span className="head">JOB DESCRIPTION*</span>
         <div style={{marginLeft:"1.4%",marginRight:"2%"}}><JoditEditorComponent keyy="desc" value={user.desc} onChange={handleChange}/></div>
@@ -175,7 +179,7 @@ return (
         <p  style={{marginTop:"1.5px"}}>Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
         </div><br/>
           <div style={{marginTop:"5px",marginBottom:"50px", border:"shadow",borderWidth:"1px",borderRadius:"7px",width:"95%",marginLeft:"2.5%"}}>
-          <div style={{marginLeft:"2%",marginTop:"1%"}}><JobCard imgflg bdg imgsrc={user.logo} cls="bg-yellow-100 w-12wh" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></div>
+          <div style={{marginLeft:"2%",marginTop:"1%"}}><JobCard imgflg bdg bgcolor={user.bgcolor} imgsrc={user.logo} cls="bg-yellow-100 w-12wh" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></div>
           <div style={{display:"flex",flexDirection:"column",justifyItems:"center",alignItems:"center",width:"100%"}}><h1 style={{textAlign:"left"}}>
         <div style={{fontSize: "35px",marginTop:"3%"}}>
         <span>{comp}</span> is hiring a
