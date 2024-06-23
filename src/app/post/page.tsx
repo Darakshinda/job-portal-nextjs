@@ -1,26 +1,18 @@
 "use client"
 import React, { useState } from 'react';
-import Navbar from "../Navbar";
-import JobList from "../Components/JobList";
 import {JobCard} from "../../stories/Job-Card";
 import {NavBar} from "../../stories/NavBar";
-import { title } from "process";
-import { Jodit } from 'jodit-react';
 import {TextInput,TextArea} from "../../stories/TextInput";import { Tags } from '@/stories/Tags';
 import { Select } from '@/stories/Dropdown';
 import JoditEditorComponent from '../Components/Jodit-Editor';
 import UploadButton from '../Components/ImgUpload';
-import Checkbox from '../Components/Check';
+import Checkbox from '../Components/Check';import ColorPickerButton from '../Components/ColorPicker';
 import SelectedOptions from '../Components/Options';
 import "../Components/Form.css";
-import locnOpns from "../post/data/location.json";import tagOpns from "../post/data/tags.json";import benefitOpns from "../post/data/benefits.json"
-import ColorPickerButton from '../Components/ColorPicker';
 
-
-
-/**
- * Primary UI component for user interaction
- */
+import locnOpns from "../post/data/location.json";import tagOpns from "../post/data/tags.json";import benefitOpns from "../post/data/benefits.json";
+import emptype from "../post/data/emptype.json";import primTag from "../post/data/primTag.json";import minSal from "../post/data/minsalary.json";
+import maxSal from "../post/data/maxsalary.json";
 
 
 
@@ -28,7 +20,7 @@ export default function Home() {
   const [user, setuser] = useState({
     company: "",position: "",emptype: "Full-time",primtg: "Software Development",tags: "",locns:'',
     logo:'',minsal:"",maxsal:'',desc:'',benefits:'',how2apply:'',email4jobappl:'',applUrl:'',
-    twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',bgcolor:'',
+    twtr:'',compMail:'',invMail:'',invAdrs:'',invNote:'',payLtr:false,pltrEml:'',fdbck:'',bgcolor:'#fefba4',
   });
 
   const handleChange = (key:string, value:string) => {
@@ -44,10 +36,6 @@ export default function Home() {
   };
   
 
-
-const b=`USD 10000 per year,USD $20,000 per year,USD $30,000 per year,USD $40,000 per year,USD $50,000 per year,USD $60,000 per year,USD $70,000 per year,USD $80,000 per year,USD $90,000 per year,USD $100,000 per year,USD $110,000 per year,USD $120,000 per year,USD $130,000 per year,USD $140,000 per year,USD $150,000 per year,USD $160,000 per year,USD $170,000 per year,USD $180,000 per year,USD $190,000 per year,USD $200,000 per year,USD $210,000 per year,USD $220,000 per year,USD $230,000 per year,USD $240,000 per year,USD $250,000 per year,USD $260,000 per year,USD $270,000 per year,USD $280,000 per year,USD $290,000 per year,USD $300,000 per year,USD $310,000 per year,USD $320,000 per year,USD $330,000 per year,USD $340,000 per year,USD $350,000 per year,USD $360,000 per year,USD $370,000 per year,USD $380,000 per year,USD $390,000 per year,USD $400,000 per year,USD $410,000 per year,USD $420,000 per year,USD $430,000 per year,USD $440,000 per year,USD $450,000 per year,USD $460,000 per year,USD $470,000 per year,USD $480,000 per year,USD $490,000 per year,USD $500,000 per year,USD $510,000 per year,USD $520,000 per year,USD $530,000 per year,USD $540,000 per year,USD $550,000 per year,USD $560,000 per year,USD $570,000 per year,USD $580,000 per year,USD $590,000 per year,USD $600,000 per year,USD $610,000 per year,USD $620,000 per year,USD $630,000 per year,USD $640,000 per year,USD $650,000 per year,USD $660,000 per year,USD $670,000 per year,USD $680,000 per year,USD $690,000 per year,USD $700,000 per year,USD $710,000 per year,USD $720,000 per year,USD $730,000 per year,USD $740,000 per year,USD $750,000 per year`
-const c=b.split(",USD").join("<USD");
-
 let comp=user.company,pos=user.position,jobdesc=user.desc,how2apply=user.how2apply;
 if(comp=="") comp="Company";if(pos=="") pos="Position";if(jobdesc=="") jobdesc=`The description of the job position will appear here. Write this in the "Job Description" box above.`;
 const disp=()=>console.log(user);
@@ -56,11 +44,11 @@ return (
     <main className="bg-base-100">
       
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
-       {user.bgcolor==""&&<JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/>}
-       {user.bgcolor!=""&&<JobCard imgflg bdg imgsrc={user.logo} cls="card glass" bgcolor={user.bgcolor} position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/>}
+       
+      <JobCard imgflg bdg imgsrc={user.logo} bgcolor={user.bgcolor} position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/>
        </main>
        <NavBar endIcon={false} post={true}/>
-       <div className=" fixed bottom-0 z-10 w-full" style={{width:"30%",height:"22%",marginLeft:"60%",backgroundColor:"white",border:"shadow",borderWidth:"2px",display:"flex",justifyItems:"center",alignItems:"center"}}>
+       <div className=" fixed bottom-0 z-10 w-full" style={{width:"30%",height:"22%",marginLeft:"60.6%",backgroundColor:"white",border:"shadow",borderWidth:"2px",display:"flex",justifyItems:"center",alignItems:"center"}}>
         <button className='btn btn-error ml-[5%] text-white font-bold'  style={{width:"90%",height:"50%",}} onClick={disp}>Post Job</button></div>
 
        <div className="group">
@@ -75,11 +63,11 @@ return (
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}> Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". We know your job is important but please DO NOT WRITE IN FULL CAPS. If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.</span>
         
         <span className="head">EMPLOYMENT TYPE*</span>
-        <Select keyy='emptype' onChange={handleChange} req={true} cls="input_company" body={`Full-time<Part-time<Contractor<Temporary<Internship<Per diem<Volunteer<Onsite`}/>
+        <Select keyy='emptype' onChange={handleChange} req={true} cls="input_company" body={emptype}/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
 
         <span className="head">PRIMARY TAG</span>
-        <Select keyy='primtg' onChange={handleChange} req={true} cls="input_company" body={`Software Development<Customer Support<Sales<Marketing<Design<Front End<Back End<Legal<Testing<Quality Assurance<Non-Tech<Other`}/>
+        <Select keyy='primtg' onChange={handleChange} req={true} cls="input_company" body={primTag}/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
         
         <span className="head">TAGS, KEYWORDS OR STACK*</span>
@@ -130,7 +118,7 @@ return (
 
         <span className="head">{`COMPANY LOGO (.JPG OR .PNG, SQUARE OR ROUND)`}</span>
         <div style={{marginLeft:"1.4%"}}><UploadButton keyy="logo" onChange={handleChange}/>
-        <div style={{display:"flex",alignItems:"center"}}>Highlight with your company's 🌈 brand color:<ColorPickerButton change={handleChange} keyy='bgcolor' /></div></div>
+        <div style={{display:"flex",alignItems:"center",marginLeft:"1%"}}><b>Highlight with your company's 🌈 brand color:</b><ColorPickerButton change={handleChange} keyy='bgcolor' /></div></div>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
         
         <span className="head">JOB DESCRIPTION*</span>
@@ -139,9 +127,9 @@ return (
         
         <span className="head">{`ANNUAL SALARY OR COMPENSATION IN USD (GROSS, ANNUALIZED, FULL-TIME-EQUIVALENT (FTE) IN USD EQUIVALENT)*`}</span>
         <div style={{marginLeft:"18%"}}>
-          <div style={{display:"inline"}}><Select keyy="minsal" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} type="small" /></div> 
+          <div style={{display:"inline"}}><Select keyy="minsal" onChange={handleChange}req={true} cls="input_company" body={minSal} type="small" /></div> 
           <a style={{display:"inline",fontSize:"30px",marginLeft:"1%"}}>{`-`}</a>
-          <div style={{display:"inline"}}><Select keyy="maxsal" onChange={handleChange}req={true} cls="input_company" body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} type="small"/></div> 
+          <div style={{display:"inline"}}><Select keyy="maxsal" onChange={handleChange}req={true} cls="input_company" body={maxSal} type="small"/></div> 
         </div>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}>It's illegal to not share salary range on job posts since 2021. Posts without salary will automatically show an estimate of salary based on similar jobs. Remote job postings are legally required to show a salary compensation range in many U.S. states and countries. Google does NOT index jobs without salary data. If it's a short-term gig, use the annual full-time equivalent. For example, if it's a 2-week project for $2,000, the annual equivalent would be $2,000 / 2 weeks * 52 weeks = $52,000. Please use USD equivalent. We don't have currency built-in yet and we'd like to use this salary data to show salary trends in remote work. Remote OK is a supporter of #OpenSalaries.</span>
 
@@ -179,7 +167,7 @@ return (
         <p  style={{marginTop:"1.5px"}}>Don't worry if it's not perfect the first time: your job is fully editable for free after posting it!</p>
         </div><br/>
           <div style={{marginTop:"5px",marginBottom:"50px", border:"shadow",borderWidth:"1px",borderRadius:"7px",width:"95%",marginLeft:"2.5%"}}>
-          <div style={{marginLeft:"2%",marginTop:"1%"}}><JobCard imgflg bdg bgcolor={user.bgcolor} imgsrc={user.logo} cls="bg-yellow-100 w-12wh" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></div>
+          <div style={{marginLeft:"2%",marginTop:"1%"}}><JobCard imgflg bdg bgcolor={user.bgcolor} imgsrc={user.logo} cls="w-12wh" position={user.position} company_name={user.company} location_restriction={user.locns} tags={user.tags} created_at="5/17/2024 23:11:25"/></div>
           <div style={{display:"flex",flexDirection:"column",justifyItems:"center",alignItems:"center",width:"100%"}}><h1 style={{textAlign:"left"}}>
         <div style={{fontSize: "35px",marginTop:"3%"}}>
         <span>{comp}</span> is hiring a
