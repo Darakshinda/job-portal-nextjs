@@ -14,9 +14,10 @@ interface Job {
 interface JobListProps {
   selectedLocationTags: string[];
   selectedJobTags: string[];
+  salaryRange: number[]; // Add salary range prop
 }
 
-const JobList: React.FC<JobListProps> = ({ selectedLocationTags, selectedJobTags }) => {
+const JobList: React.FC<JobListProps> = ({ selectedLocationTags, selectedJobTags, salaryRange }) => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
@@ -31,7 +32,11 @@ const JobList: React.FC<JobListProps> = ({ selectedLocationTags, selectedJobTags
         params.append('position', selectedJobTags.join(','));
       }
       if (selectedLocationTags.length > 0) {
-        selectedLocationTags.forEach(tag => params.append('location', tag));
+        params.append('location', selectedLocationTags.join(','));
+      }
+      if (salaryRange.length === 2) {
+        params.append('salary_min', salaryRange[0].toString());
+        params.append('salary_max', salaryRange[1].toString());
       }
       params.append('limit', fetchCount.toString());
       params.append('offset', ((page - 1) * fetchCount).toString());
@@ -52,10 +57,14 @@ const JobList: React.FC<JobListProps> = ({ selectedLocationTags, selectedJobTags
   }, [page]);
 
   useEffect(() => {
-    setPage(1); // Reset page number when tags change
-    setJobs([]); // Clear previous jobs when tags change
-    fetchJobs(); // Fetch jobs when tags change
-  }, [selectedLocationTags, selectedJobTags]);
+    setJobs([]); // Clear previous jobs when tags or salary range change
+    setPage(1); // Reset page number when tags or salary range change to refetch from the beginning
+  }, [selectedLocationTags, selectedJobTags, salaryRange]);
+
+  // Refetch jobs when tags, salary range or page change
+  useEffect(() => {
+    fetchJobs();
+  }, [selectedLocationTags, selectedJobTags, salaryRange, page]);
 
   // Function to handle scroll event
   const handleScroll = () => {

@@ -1,9 +1,10 @@
 import React from 'react';
 
+interface option{label?:string}
 
 interface Props {
  
-  keyy?:string;cls?: string;onChange?: Function;req?:boolean;body?:string;id?:string;type?:string;
+  keyy?:string;cls?: string;onChange?: Function;req?:boolean;body?:option[];id?:string;type?:string;
 }
 interface Propd {
  
@@ -14,14 +15,14 @@ interface Propd {
  * Primary UI component for user interaction
  */
 export const Select = ({keyy='',
-  cls=`select select-bordered w-full max-w-xs`,req=false,onChange,body="",id,type="",
+  cls=`select select-bordered w-full max-w-xs`,req=false,onChange,body=[],id,type="",
 }: Props) => {
 if(type=="small") return(
   
   <select className={`${cls}`} required={req} onChange={(event)=>onChange(keyy,event.target.value) } id={id} style={{display:"inline",width:"37%"}}>
-  {body.split("<").map((option) => (
+  {body.map((option) => (
         <option>
-          {option}
+          {option.label}
         </option>
       ))}
 </select>
@@ -30,9 +31,9 @@ if(type=="small") return(
   return(
   
   <select className={`${cls}`} required={req} onChange={(event)=>onChange(keyy,event.target.value)} id={id}>
-  {body.split("<").map((option) => (
+  {body.map((option) => (
         <option>
-          {option}
+          {option.label}
         </option>
       ))}
 </select>

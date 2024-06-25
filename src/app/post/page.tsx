@@ -14,7 +14,9 @@ import UploadButton from '../Components/ImgUpload';
 import Checkbox from '../Components/check';
 import SelectedOptions from '../Components/Options';
 import "../Components/Form.css";
-import locnOpns from "../post/data/location.json";import tagOpns from "../post/data/tags.json";import benefitOpns from "../post/data/benefits.json"
+import locnOpns from "../post/data/location.json";import tagOpns from "../post/data/tags.json";import benefitOpns from "../post/data/benefits.json";
+import emptype from "../post/data/emptype.json";import primTag from "../post/data/primTag.json";import minSal from "../post/data/minsalary.json";
+import maxSal from "../post/data/maxsalary.json";
 
 
 
@@ -28,7 +30,7 @@ export default function Home() {
     const [user, setuser] = useState({
       company_name: "", position: "", emptype: "Full-time", primary_tag: "Software Development", tags: "", location_restriction: '',
       logo: '', annual_salary_min: "", annual_salary_max: '', job_description: '', benefits: '', how_to_apply: '', apply_email_address: '', apply_url: '',
-      company_twitter: '', company_email: '', invoice_email: '', invoice_address: '', invoice_notes: '', pay_later: false, pltrEml: '', feedback: '',
+      company_twitter: '', company_email: '', invoice_email: '', invoice_address: '', invoice_notes: '', pay_later: false, pltrEml: '', feedback: '',bgcolor:'#fefba4'
     });
 
     const handleChange = (key, value) => {
@@ -70,7 +72,7 @@ const handleSubmit = () => {
 return (
     <main className="bg-base-100">
       <main className=" fixed bottom-0 z-10 left-[2.5%] w-full" style={{width:"60%",}}>
-       <JobCard imgflg bdg imgsrc={user.logo} cls="card glass" position={user.position} company_name={user.company_name} location_restriction={user.location_restriction} tags={user.tags} created_at="5/17/2024 23:11:25"/></main>
+      <JobCard imgflg bdg imgsrc={user.logo} bgcolor={user.bgcolor} position={user.position} company_name={user.company_name} location_restriction={user.location_restriction} tags={user.tags} created_at="5/17/2024 23:11:25"/></main>
        <NavBar endIcon={false} post={true}/>
        <div className=" fixed bottom-0 z-10 w-full" style={{width:"30%",height:"22%",marginLeft:"60%",backgroundColor:"white",border:"shadow",borderWidth:"2px",display:"flex",justifyItems:"center",alignItems:"center"}}>
         <button className='btn btn-error ml-[5%] text-white font-bold'  style={{width:"90%",height:"50%",}} onClick={handleSubmit}>Post Job</button></div>
@@ -87,11 +89,11 @@ return (
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}> Please specify as single job position like "Marketing Manager" or "Node JS Developer", not a sentence like "Looking for PM / Biz Dev / Manager". We know your job is important but please DO NOT WRITE IN FULL CAPS. If posting multiple roles, please create multiple job posts. A job post is limited to a single job. We only allow real jobs, absolutely no MLM-type courses "learn how to work online" please.</span>
         
         <span className="head">EMPLOYMENT TYPE*</span>
-        <Select keyy='emptype' onChange={handleChange} req={true} cls="input_company" body={`Full-time<Part-time<Contractor<Temporary<Internship<Per diem<Volunteer<Onsite`}/>
+        <Select keyy='emptype' onChange={handleChange} req={true} cls="input_company" body={emptype}/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
 
         <span className="head">PRIMARY TAG</span>
-        <Select keyy='primary_tag' onChange={handleChange} req={true} cls="input_company" body={`Software Development<Customer Support<Sales<Marketing<Design<Front End<Back End<Legal<Testing<Quality Assurance<Non-Tech<Other`}/>
+        <Select keyy='primary_tag' onChange={handleChange} req={true} cls="input_company" body={primTag}/>
         <span className="info" style={{marginTop:"8px", marginLeft:"18px",width: "95%",}}></span>
         
         <span className="head">TAGS, KEYWORDS OR STACK*</span>
@@ -155,7 +157,7 @@ return (
             onChange={(key, value) => handleChange(key, value)} 
             req={true} 
             cls="input_company" 
-            body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[0]} 
+            body={minSal} 
             type="small" 
           />
         </div> 
@@ -166,7 +168,7 @@ return (
             onChange={(key, value) => handleChange(key, value)} 
             req={true} 
             cls="input_company" 
-            body={`Minimum per year,${c}&&Maximum per year,${c}`.split("&&")[1]} 
+            body={maxSal} 
             type="small"
           />
         </div> 

@@ -5,16 +5,17 @@ import Navbar from './Navbar';
 import JobList from './Components/JobList';
 import SalaryRangeSlider from './Components/FilterBox';
 import { Tags2 } from '@/stories/Tags2';
+import  locationOptions  from "../app/post/data/location.json"
 
-const locationOptions = [
-  { label: 'New York' },
-  { label: 'Los Angeles' },
-  { label: 'Chicago' },
-  { label: 'San Francisco' },
-  { label: 'Seattle' },
-  { label: 'Boston' },
-  {label: 'Africa'},
-];
+// const locationOptions = [
+//   { label: 'New York' },
+//   { label: 'Los Angeles' },
+//   { label: 'Chicago' },
+//   { label: 'San Francisco' },
+//   { label: 'Seattle' },
+//   { label: 'Boston' },
+//   {label: 'Africa'},
+// ];
 
 const jobPositionOptions = [
   { label: 'Software Engineer' },
@@ -47,6 +48,10 @@ const Home: React.FC = () => {
     console.log('Selected Benefit Tags:', tags);
   };
 
+  const handleSalaryRangeChange = (range: number[]) => {
+    setSalaryRange(range);
+    console.log('Selected Salary Range:', range);
+  };
   return (
     <main>
       <Navbar />
@@ -122,7 +127,7 @@ const Home: React.FC = () => {
         <JobList
           selectedLocationTags={selectedLocationTags}
           selectedJobTags={selectedJobTags}
-          // salaryRange={salaryRange}
+          salaryRange={salaryRange}
         />
       </div>
     </main>
