@@ -18,6 +18,10 @@ const JobCard: React.FC<JobCardProps> = ({
   tags,
   created_at,
 }) => {
+  // Split tags and ensure primary tag is first
+  const tagsArray = tags.split(",").map(tag => tag.trim());
+  const primaryTag = tagsArray.shift(); // Remove and store the first tag as primary
+
   return (
     <li className="bg-white border border-gray-200 rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 transition-transform transform hover:scale-105 flex flex-col items-start">
       <div className="flex justify-between w-full mb-2">
@@ -27,15 +31,19 @@ const JobCard: React.FC<JobCardProps> = ({
         <div className="w-2/5">
           <p className="text-gray-700">{company_name}</p>
         </div>
-        {tags &&
-          tags.split(",").map((tag, index) => (
-            <div
-              key={index}
-              className="border border-gray-300 rounded-md p-1 ml-2"
-            >
-              <p className="text-black-400">{tag.trim()}</p>
-            </div>
-          ))}
+        {primaryTag && (
+          <div className="border border-gray-300 rounded-md p-1 ml-2">
+            <p className="text-black-400">{primaryTag}</p>
+          </div>
+        )}
+        {tagsArray.map((tag, index) => (
+          <div
+            key={index}
+            className="border border-gray-300 rounded-md p-1 ml-2"
+          >
+            <p className="text-black-400">{tag}</p>
+          </div>
+        ))}
         <div className="ml-auto flex items-center">
           <p className="text-black-500 mr-32">
             {getTimeDifference(created_at)}

@@ -5,35 +5,22 @@ import Navbar from './Navbar';
 import JobList from './Components/JobList';
 import SalaryRangeSlider from './Components/FilterBox';
 import { Tags2 } from '@/stories/Tags2';
-import  locationOptions  from "../app/post/data/location.json"
-
-// const locationOptions = [
-//   { label: 'New York' },
-//   { label: 'Los Angeles' },
-//   { label: 'Chicago' },
-//   { label: 'San Francisco' },
-//   { label: 'Seattle' },
-//   { label: 'Boston' },
-//   {label: 'Africa'},
-// ];
+import locationOptions from "../app/post/data/location.json";
+import tagOptions from "../app/post/data/tags.json";
 
 const jobPositionOptions = [
   { label: 'Software Engineer' },
   { label: 'Data Analyst' },
   { label: 'Product Manager' },
-  { label: 'UI/UX Designer' },
+  { label: 'UX/UI Designer' },
 ];
 
-const benefitOptions = [
-  { label: 'Health Insurance' },
-  { label: 'Paid Time Off' },
-  { label: 'Retirement Benefits' },
-  { label: 'Flexible Working Hours' },
-];
+
+
 const Home: React.FC = () => {
   const [selectedLocationTags, setSelectedLocationTags] = useState<string[]>([]);
   const [selectedJobTags, setSelectedJobTags] = useState<string[]>([]);
-  const [selectedBenefitTags, setSelectedBenefitTags] = useState<string[]>([]);
+  const [selectedTagTags, setSelectedTagTags] = useState<string[]>([]);
   const [salaryRange, setSalaryRange] = useState([0, 100000]);
 
   const handleLocationTagSelection = (tags: string[]) => {
@@ -43,15 +30,17 @@ const Home: React.FC = () => {
   const handleJobTagSelection = (tags: string[]) => {
     setSelectedJobTags(tags);
   };
-  const handleBenefitTagSelection = (tags: string[]) => {
-    setSelectedBenefitTags(tags);
-    console.log('Selected Benefit Tags:', tags);
+
+  const handleTagTagSelection = (tags: string[]) => {
+    setSelectedTagTags(tags);
+    console.log('Selected Tags:', tags);
   };
 
   const handleSalaryRangeChange = (range: number[]) => {
     setSalaryRange(range);
     console.log('Selected Salary Range:', range);
   };
+
   return (
     <main>
       <Navbar />
@@ -89,6 +78,7 @@ const Home: React.FC = () => {
         <div className="flex gap-4 justify-center items-center">
           <div>
             <h3 className="text-lg font-semibold mb-2"></h3>
+            
             <Tags2
               options={locationOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
@@ -110,24 +100,24 @@ const Home: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-2"></h3>
             <Tags2
-              options={benefitOptions}
+              options={tagOptions}
               cls="input_company{background-color: #f2f1ed;width: 95%;margin-top:10px;margin-left: 14px;border-radius: 7px;border-width: 1px;border-color: #b1b3b6;padding: 3px 10px;}"
-              placeholder="Search by Benefits"
+              placeholder="Search by Tags"
               dynamic={true}
-              onSelect={handleBenefitTagSelection}
+              onSelect={handleTagTagSelection}
             />
           </div>
-          <div className= "">
+          <div className="">
             <SalaryRangeSlider
-            onRangeChange={setSalaryRange}
-            salaryRange={salaryRange}
-          />
+              onRangeChange={setSalaryRange}
+              salaryRange={salaryRange}
+            />
           </div>
         </div>
         <JobList
           selectedLocationTags={selectedLocationTags}
           selectedJobTags={selectedJobTags}
-          salaryRange={salaryRange}
+          selectedTagTags={selectedTagTags}
         />
       </div>
     </main>
