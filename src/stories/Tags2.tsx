@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Tag from '@/app/Components/Tag';
-import ClickOutsideDiv from '@/app/Components/ClcikoutsideDiv';
+import ClickOutsideDiv from '../app/Components/ClickoutsideDiv';
+import "@/app/Components/Clickoutsidediv.css";
+
 
 interface Option {
   label: string;
@@ -138,7 +140,7 @@ export const Tags2: React.FC<Props> = ({
           {renderInput()}
         </div>
         {sel === 1 && (
-          <div className="absolute bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-50 w-full max-w-md">
+          <div className="absolute bg-white border border-gray-300 rounded-lg mt-2 shadow-lg z-50 w-full max-w-md scrollable-div"  >
             <ul className="menu p-2 max-w-full">
               {filteredOptions.map((option) => renderOption(option))}
             </ul>
